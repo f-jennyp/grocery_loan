@@ -58,10 +58,10 @@ if (!$rr) {
 		$retval = mysqli_query($conn, $sql);
 
 		if (!$retval) {
-            die('Could not get data: ' . mysqli_error($conn));
-        }
-        $row = mysqli_fetch_array($retval, MYSQLI_NUM);
-        $rec_count = $row[0];
+			die('Could not get data: ' . mysqli_error($conn));
+		}
+		$row = mysqli_fetch_array($retval, MYSQLI_NUM);
+		$rec_count = $row[0];
 
 		if (isset($_GET['pagi'])) {
 			$pagi = $_GET['pagi'] + 1;

@@ -82,7 +82,7 @@ header('location:../index.php');
 	<!-- <li><a href="index.php?page=update_password"><span class="glyphicon glyphicon-lock"></span> Update Password</a></li> -->
     <li><a href="index.php?page=display_group"><span class="glyphicon glyphicon-user"></span>  Groups</a></li>
 	<li><a href="index.php?page=display_member"><span class="glyphicon glyphicon-user"></span>  Members</a></li>
-	<li><a href="index.php?page=display_loan"><span class="glyphicon glyphicon-usd"></span> Loan</a></li>
+	<li><a href="index.php?page=#"><span class="glyphicon glyphicon-table"></span> INSERT NEW</a></li>
 	<li><a href="index.php?page=display_payment_history"><span class="glyphicon glyphicon-time"></span> Payment</a></li>
 			
             

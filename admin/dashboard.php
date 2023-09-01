@@ -4,12 +4,12 @@ $r=mysqli_num_rows($q);
 
 
 
-$q2=mysqli_query($conn,"select * from member where gender='m'");
-$r2=mysqli_num_rows($q2);
+// $q2=mysqli_query($conn,"select * from member where gender='m'");
+// $r2=mysqli_num_rows($q2);
 
 
-$q3=mysqli_query($conn,"select * from member where gender='f'");
-$r3=mysqli_num_rows($q3);
+// $q3=mysqli_query($conn,"select * from member where gender='f'");
+// $r3=mysqli_num_rows($q3);
 
 
 
@@ -53,7 +53,7 @@ $r8=mysqli_num_rows($q8);
 
 </div>
 
-<div class="row placeholders">
+<!-- <div class="row placeholders">
   <div class="col-xs-6 col-sm-3 placeholder">
     <img src="../images/menficn.png" width="150" height="150" class="img-responsive"
       alt="Generic placeholder thumbnail">
@@ -66,4 +66,4 @@ $r8=mysqli_num_rows($q8);
     <h4>Total Women Members</h4>
     <span class="text-muted"><?php echo $r3; ?></span>
   </div>
-</div>
+</div> -->

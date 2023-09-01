@@ -1,155 +1,202 @@
-<?php 
-extract($_POST);
-if(isset($save))
-{
+<?php
+if (isset($_GET['table'])) {
+    $tableName = mysqli_real_escape_string($conn, urldecode($_GET['table']));
 
-	if($source=="" || $amount=="" || $group=="" || $payment=="" || $due=="")
-	{
-	$err="<font color='red'>fill all the fileds first</font>";	
-	}
-	else
-	{
-$sql=mysqli_query($conn,"select * from loan where group_id='$group'");
-$r=mysqli_num_rows($sql);
-		if($r!=true)
-		{
-		mysqli_query($conn,"insert into loan values('','$group','$source','$amount','$intereset','$payment_term','$total_paid','$emi_per_month','$payment','$due')");
-		
-$err="<div class='alert alert-success'>Congratulations! Loan has been alloted to this Group</div>";
-		}
-		
-		else
-		{
+if (isset($_POST['save'])) {
+	
+		// $date = $_POST['date'];
+		// $loan_amount = $_POST['loan_amount'];
+		// $payment_amount = $_POST['payment_amount'];
+		// $or_num = $_POST['or_num'];
+		// $or_date = $_POST['or_date'];
+		// $amount_balance = $_POST['amount_balance'];
+		// $loan_balance = $_POST['loan_balance'];
+		// $sc_starts = $_POST['sc_starts'];
+		// $four_percent = $_POST['four_percent'];
+		// $sc_dates = $_POST['sc_dates'];
+		// $months = $_POST['months'];
+		// $four_percent_sc = $_POST['four_percent_sc'];
+		// $sc_payments = $_POST['sc_payments'];
+		// $sc_payments_or_num = $_POST['sc_payments_or_num'];
+		// $sc_payments_date = $_POST['sc_payments_date'];
+		// $sc_balance = $_POST['sc_balance'];
+		$date = mysqli_real_escape_string($conn, $_POST['date']);
+        $loan_amount = mysqli_real_escape_string($conn, $_POST['loan_amount']);
+        $payment_amount = mysqli_real_escape_string($conn, $_POST['payment_amount']);
+        $or_num = mysqli_real_escape_string($conn, $_POST['or_num']);
+        $or_date = mysqli_real_escape_string($conn, $_POST['or_date']);
+        $amount_balance = mysqli_real_escape_string($conn, $_POST['amount_balance']);
+        $loan_balance = mysqli_real_escape_string($conn, $_POST['loan_balance']);
+        $sc_starts = mysqli_real_escape_string($conn, $_POST['sc_starts']);
+        $four_percent = mysqli_real_escape_string($conn, $_POST['four_percent']);
+        $sc_dates = mysqli_real_escape_string($conn, $_POST['sc_dates']);
+        $months = mysqli_real_escape_string($conn, $_POST['months']);
+        $four_percent_sc = mysqli_real_escape_string($conn, $_POST['four_percent_sc']);
+        $sc_payments = mysqli_real_escape_string($conn, $_POST['sc_payments']);
+        $sc_payments_or_num = mysqli_real_escape_string($conn, $_POST['sc_payments_or_num']);
+        $sc_payments_date = mysqli_real_escape_string($conn, $_POST['sc_payments_date']);
+        $sc_balance = mysqli_real_escape_string($conn, $_POST['sc_balance']);
 
-	$err="<div class='alert alert-danger'>Loan already allotted to this Group</div>";
+
+		if (empty($date) || empty($loan_amount)) {
+			// || empty($loan_amount) || empty($payment_amount) || empty($or_num) || empty($or_date) || empty($amount_balance) || empty($loan_balance) || empty($sc_starts) || empty($four_percent) || empty($sc_dates) || empty($months) || empty($four_percent_sc)) {
+			$err = "<font color='red'>Fill in all the required fields</font>";
+		} else {
 		
-		}
-	}
+			$sql = "INSERT INTO $tableName (date, loan_amount, payment_amount, or_num, or_date, amount_balance, loan_balance, sc_starts, four_percent, sc_dates, months, four_percent_sc, sc_payments, sc_payments_or_num, sc_payments_date, sc_balance) VALUES (
+                '$date', '$loan_amount', '$payment_amount', '$or_num', '$or_date', '$amount_balance', '$loan_balance', '$sc_starts', '$four_percent', '$sc_dates', '$months', '$four_percent_sc', '$sc_payments', '$sc_payments_or_num', '$sc_payments_date', '$sc_balance'
+            )";
+
+            // Execute the SQL query
+            if (mysqli_query($conn, $sql)) {
+                $err = "<div class='alert alert-success'>Loan has been allotted successfully!</div>";
+            } else {
+                $err = "<div class='alert alert-danger'>Error: " . mysqli_error($conn) . "</div>";
+            }
+        }
+    }
 }
-
 ?>
+
 <h2 align="center">Add Loan Details</h2>
 <form method="post">
-	
+
 	<div class="row">
 		<div class="col-sm-4"></div>
-		<div class="col-sm-4"><?php echo @$err;?></div>
+		<div class="col-sm-4"><?php echo @$err; ?></div>
 	</div>
-	
-	<div class="row" style="margin-top:10px">
-		<div class="col-sm-4">Group</div>
-		<div class="col-sm-5">
-		<select name="group" class="form-control" required>
-			<option value="">---Select Group---</option>
-			<?php 
-$q1=mysqli_query($conn,"select * from groups");
-while($r1=mysqli_fetch_assoc($q1))
-{
-echo "<option value='".$r1['group_id']."'>".$r1['group_name']."</option>";
-}
-			?>
-		</select>
-		</div>
-	</div>
-	
-	<div class="row" style="margin-top:10px">
-		<div class="col-sm-4">Loan Source</div>
-		<div class="col-sm-5">
-		<select name="source" class="form-control" required>
-			<option value="">---Select Loan Source---</option>
-			<option>Government</option>
-			<option>Council</option>
-			<option>Life Insurance Companies</option>
-			<option>Public and Private Banks</option>
-			<option>Online Lenders</option>
-		</select>
-		</div>
-	</div>
-	
-	<script>
-		function loanamount()
-		{
-		var original=document.getElementById("original").value;	
-		var interest=document.getElementById("interest").value;	
-		var year=document.getElementById("payment_term").value;	
-		
-		var interest1=(Number(original)*Number(interest)*Number(year))/100;
-		var total=Number(original)+Number(interest1);
-		
-		var emi=total/(year*12);
-		document.getElementById("total_paid").value=total;
-		document.getElementById("emi_per_month").value=emi;
-		
-		}
-	</script>
-	
-	<div class="row" style="margin-top:10px">
-		<div class="col-sm-4">Amount</div>
-		<div class="col-sm-5">
-		<input type="number" id="original" name="amount" class="form-control" required/></div>
-	</div>
-	
-	
-	
-	<div class="row" style="margin-top:10px">
-		<div class="col-sm-4">Loan Interest (%)</div>
-		<div class="col-sm-5">
-		<input type="text" name="intereset" id="interest" value="10" readonly="true" class="form-control" required/></div>
-	</div>
-	
 
 	<div class="row" style="margin-top:10px">
-		<div class="col-sm-4">Term of Payment (In Year)</div>
+		<div class="col-sm-4">Date</div>
 		<div class="col-sm-5">
-		<select onchange="loanamount()" name="payment_term" id="payment_term" class="form-control" required>
-			<option value="">---Select Term of Payment---</option>
-			<?php
-				for($i=1;$i<=10;$i++)
-				{
-				echo "<option value='".$i."'>".$i."</option>";
-				}
-			 ?>
-		</select>
+			<input type="date" name="date" class="form-control" required />
 		</div>
 	</div>
-	
+
 	<div class="row" style="margin-top:10px">
-		<div class="col-sm-4">Total Paid (With Interest)</div>
+		<div class="col-sm-4">Loan Amount</div>
 		<div class="col-sm-5">
-		<input type="text" id="total_paid" name="total_paid" class="form-control" readonly/></div>
-	</div>
-	
-	<div class="row" style="margin-top:10px">
-		<div class="col-sm-4">Pay Every Month (EMI Per Month)</div>
-		<div class="col-sm-5">
-		<input type="text" id="emi_per_month" name="emi_per_month" class="form-control" readonly/></div>
-	</div>
-	
-	<div class="row" style="margin-top:10px">
-		<div class="col-sm-4">Payment Schedule</div>
-		<div class="col-sm-5">
-		<input type="date" name="payment" min="2016-01-01" class="form-control"  required/>
-	
+			<input type="number" id="loan_amount" name="loan_amount" class="form-control" />
 		</div>
 	</div>
-	
+
 	<div class="row" style="margin-top:10px">
-		<div class="col-sm-4">Payment Due Date</div>
+		<div class="col-sm-4">Payment Amount</div>
 		<div class="col-sm-5">
-		<input type="date" name="due" min="2016-01-01" class="form-control" required/>
-	
+			<input type="number" name="payment_amount" class="form-control" />
 		</div>
 	</div>
-	
-	
+
 	<div class="row" style="margin-top:10px">
-	<div class="col-sm-4"></div>
+		<div class="col-sm-4">OR #</div>
+		<div class="col-sm-5">
+			<input type="number" name="or_num" class="form-control" />
+		</div>
+	</div>
+
+	<div class="row" style="margin-top:10px">
+		<div class="col-sm-4">OR Date</div>
+		<div class="col-sm-5">
+			<input type="date" name="or_date" class="form-control" />
+		</div>
+	</div>
+
+	<div class="row" style="margin-top:10px">
+		<div class="col-sm-4">Amount Balance</div>
+		<div class="col-sm-5">
+			<input type="number" name="amount_balance" class="form-control" />
+		</div>
+	</div>
+
+	<div class="row" style="margin-top:10px">
+		<div class="col-sm-4">Loan Balance</div>
+		<div class="col-sm-5">
+			<input type="number" name="loan_balance" class="form-control" />
+		</div>
+	</div>
+
+	<div class="row" style="margin-top:10px">
+		<div class="col-sm-4">SC Starts</div>
+		<div class="col-sm-5">
+			<input type="text" name="sc_starts" class="form-control" />
+		</div>
+	</div>
+
+	<div class="row" style="margin-top:10px">
+		<div class="col-sm-4">@ 4%</div>
+		<div class="col-sm-5">
+			<input type="number" id="four_percent" name="four_percent" class="form-control" readonly />
+		</div>
+	</div>
+
+	<!-- JavaScript to calculate the 4% and update the input field -->
+	<script>
+		// Function to calculate 4% of loan amount
+		function calculateFourPercent() {
+			var loanAmount = document.getElementById('loan_amount').value;
+			var fourPercent = loanAmount * 0.04;
+			document.getElementById('four_percent').value = fourPercent;
+		}
+
+		// Attach the function to the input field's onchange event
+		document.getElementById('loan_amount').addEventListener('input', calculateFourPercent);
+	</script>
+
+	<div class="row" style="margin-top:10px">
+		<div class="col-sm-4">SC Dates</div>
+		<div class="col-sm-5">
+			<input type="text" name="sc_dates" class="form-control" />
+		</div>
+	</div>
+
+	<div class="row" style="margin-top:10px">
+		<div class="col-sm-4">Months</div>
+		<div class="col-sm-5">
+			<input type="number" name="months" class="form-control" />
+		</div>
+	</div>
+
+	<div class="row" style="margin-top:10px">
+		<div class="col-sm-4">4% SC</div>
+		<div class="col-sm-5">
+			<input type="number" name="four_percent_sc" class="form-control" />
+		</div>
+	</div>
+
+	<div class="row" style="margin-top:10px">
+		<div class="col-sm-4">SC Payments</div>
+		<div class="col-sm-5">
+			<input type="number" name="sc_payments" class="form-control" />
+		</div>
+	</div>
+
+	<div class="row" style="margin-top:10px">
+		<div class="col-sm-4">SC OR#</div>
+		<div class="col-sm-5">
+			<input type="number" name="sc_payments_or_num" class="form-control" />
+		</div>
+	</div>
+
+	<div class="row" style="margin-top:10px">
+		<div class="col-sm-4">SC Date</div>
+		<div class="col-sm-5">
+			<input type="date" name="sc_payments_date" class="form-control" />
+		</div>
+	</div>
+
+	<div class="row" style="margin-top:10px">
+		<div class="col-sm-4">SC Balance</div>
+		<div class="col-sm-5">
+			<input type="number" name="sc_balance" class="form-control" />
+		</div>
+	</div>
+
+	<div class="row" style="margin-top:10px">
+		<div class="col-sm-4"></div>
 		<div class="col-sm-4">
-		
-		
-<input type="submit" value="Process New Loan" name="save" class="btn btn-success"/>
-		<input type="reset" class="btn btn-danger"/>
+			<input type="submit" value="Process New Loan" name="save" class="btn btn-success" />
+			<input type="reset" class="btn btn-danger" />
 		</div>
 		<div class="col-sm-4"></div>
 	</div>
-</form>	
+</form>
