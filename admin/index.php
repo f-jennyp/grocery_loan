@@ -81,7 +81,7 @@ header('location:../index.php');
 	<li><a href="index.php"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>		
 	<!-- <li><a href="index.php?page=update_password"><span class="glyphicon glyphicon-lock"></span> Update Password</a></li> -->
     <li><a href="index.php?page=display_sales_colln"><span class="glyphicon glyphicon-th-list"></span>  Sales Collection Summary</a></li>
-	<li><a href="index.php?page=display_member"><span class="glyphicon glyphicon-user"></span>  Members</a></li>
+	<li><a href="index.php?page=display_gl_member"><span class="glyphicon glyphicon-user"></span>  Members</a></li>
 	<li><a href="index.php?page=#"><span class="glyphicon glyphicon-list"></span> INSERT NEW</a></li>
 	<li><a href="index.php?page=display_payment_history"><span class="glyphicon glyphicon-time"></span> Payment</a></li>
 			
@@ -99,6 +99,11 @@ header('location:../index.php');
 		  	if($page=="add_sales_colln")
 			{
 				include('add_sales_colln.php');
+			
+			}
+			if($page=="add_sales_colln_table")
+			{
+				include('add_sales_colln_table.php');
 			
 			}
 		  	if($page=="display_sales_colln")
@@ -122,9 +127,9 @@ header('location:../index.php');
 				include('update_sales_colln.php');
 			
 			}
-			if($page=="display_member")
+			if($page=="display_gl_member")
 			{
-				include('display_member.php');
+				include('display_gl_member.php');
 			
 			}
 			if($page=="search_member")
@@ -169,25 +174,21 @@ header('location:../index.php');
 			
 			}
 			
-			if($page=="display_payment_history")
-			{
-				include('display_payment_history.php');
-			
-			}
-			
-			if($page=="add_payment_history")
-			{
-				include('add_payment_history.php');
-			
-			}
-			
 			if($page=="update_password")
 			{
 				include('update_password.php');
 			
 			}
+			if($page=="print_loan_record")
+			{
+				include('print_loan_record.php');
 			
+			}
+			if($page=="print_loan_record")
+			{
+				include('print_loan_record.php');
 			
+			}
 			
 			
 			

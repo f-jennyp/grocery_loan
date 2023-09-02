@@ -41,7 +41,7 @@ $r = mysqli_fetch_array($sql);
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">Name</div>
 		<div class="col-sm-5">
-			<input type="text" value="<?php echo $r[1]; ?>" name="name" class="form-control" required/>
+			<input type="text" value="<?php echo $r[1]; ?>" name="name" class="form-control" readonly/>
 		</div>
 	</div>
 
@@ -93,13 +93,6 @@ $r = mysqli_fetch_array($sql);
 			<input type="text" value="<?php echo $r[8]; ?>" name="remarks" class="form-control" required/>
 		</div>
 	</div>
-
-	<?php
-	$q1 = mysqli_query($conn, "select * from groups");
-	while ($r1 = mysqli_fetch_assoc($q1)) {
-
-	}
-	?>
 
 
 	<div class="row" style="margin-top:10px">

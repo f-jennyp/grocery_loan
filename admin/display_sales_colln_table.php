@@ -16,30 +16,30 @@ if (isset($_GET['name'])) {
 			}
 		}
 	</script>
-	<h2 align="center"><?php $tableName ?></h2>
+	<h2 align="center"><?php echo str_replace('_', ' ', $tableName) ?></h2>
 
 	<table class="table table-bordered table-hover table-striped">
 		<!-- Search form -->
 		<tr>
 			<form method="post" action="index.php?page=search_loan">
-				<td colspan="12">
+				<td colspan="9">
 					<input type="text" placeholder="Search" name="searchMember" class="form-control" required />
 				</td>
-				<td colspan="5">
+				<td colspan="3">
 					<input type="submit" value="Search" name="sub" class="btn btn-warning" />
 				</td>
 			</form>
 
 		</tr>
 		<tr>
-			<td colspan="5">
+			<td colspan="12">
 
-				<a title="Add New Loan Records" href="index.php?page=add_loan&table=<?php echo urlencode($tableName); ?>"><button class="btn btn-success btn-sm">Add
-						New Loan <span class="glyphicon glyphicon-plus"></button></a>
+				<a title="Add New Sales Colln Record" href="index.php?page=add_sales_colln_table&table=<?php echo urlencode($tableName); ?>"><button class="btn btn-success btn-sm">Add
+						New <span class="glyphicon glyphicon-plus"></button></a>
 				&nbsp; &nbsp;
 
 				<!-- Print button -->
-				<a title="Print all Loan Records" href="print_loan_record.php">
+				<a title="Print all Sales Colln Record" href="print_loan_record.php">
 					<button class="btn btn-primary btn-sm">Print <span class="glyphicon glyphicon-print"></span></button>
 				</a>
 			</td>
@@ -55,7 +55,7 @@ if (isset($_GET['name'])) {
 			<th>Amount</th>
 			<th>Overage</th>
 			<th>Total</th>
-			<th>c. Total</th>
+			<th>C. Total</th>
 			<th>Actions</th>
 
 		</Tr>

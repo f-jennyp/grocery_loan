@@ -11,10 +11,6 @@ if (isset($_POST['save'])) {
         if ($r != true) {
             mysqli_query($conn, "INSERT INTO sales_collection_summary VALUES('', '$table_name')");
 
-
-			// $sql = "INSERT INTO sales_collection_summary (table_name) VALUES ('$table_name')";
-
-
             $newTableName = str_replace(' ', '_', $table_name); // Replace spaces with underscores
             $loanTableQuery = "CREATE TABLE $newTableName (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -31,6 +27,7 @@ if (isset($_POST['save'])) {
             mysqli_query($conn, $loanTableQuery);
 
             $err = "<div class='alert alert-success'>New member has been added successfully</div>";
+			header('location:index.php?page=display_sales_colln');
         } else {
             $err = "<div class='alert alert-danger'>This member already exists</div>";
         }

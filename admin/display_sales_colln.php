@@ -3,9 +3,9 @@ $q = mysqli_query($conn, "select * from sales_collection_summary");
 
 ?>
 <script>
-	function DeleteMember(id, memberName) {
-		if (confirm("You want to delete this table ?")) {
-			window.location.href = "delete_sales_colln.php?id=" + id + "&memberName=" + memberName;
+	function DeleteTable(id, tableName) {
+		if (confirm("You want to delete this table?")) {
+			window.location.href = "delete_sales_colln.php?id=" + id + "&tableName=" + tableName;
 		}
 	}
 </script>
@@ -14,7 +14,7 @@ $q = mysqli_query($conn, "select * from sales_collection_summary");
 <table class="table table-bordered table-hover table-striped">
 	<tr>
 		<form method="post" action="index.php?page=search_sales_colln">
-			<td colspan="8">
+			<td colspan="5">
 				<input type="text" placeholder="Search" name="searchSalesColln" class="form-control" required />
 			</td>
 			<td colspan="3">
@@ -23,7 +23,7 @@ $q = mysqli_query($conn, "select * from sales_collection_summary");
 		</form>
 	</tr>
 	<tr>
-		<td colspan="8"><a href="index.php?page=add_sales_colln"><button class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Add New Member</button></a></td>
+		<td colspan="8"><a href="index.php?page=add_sales_colln"><button class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Add New Table</button></a></td>
 	</tr>
 	<Tr class="active">
 		<th>NO</th>
@@ -75,9 +75,9 @@ $q = mysqli_query($conn, "select * from sales_collection_summary");
 	?>
 
 		<Td>
-			<a href="javascript:DeleteMember('<?php echo $row['id']; ?>', '<?php echo $row['table_name']; ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
+			<a href="javascript:DeleteTable('<?php echo $row['id']; ?>', '<?php echo $row['table_name']; ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
 
-			<a href="index.php?page=update_sales_colln&member_id=<?php echo $row['id']; ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
+			<a href="index.php?page=update_sales_colln&id=<?php echo $row['id']; ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
 
 			<a href="index.php?page=display_sales_colln_table&name=<?php echo urlencode(str_replace(' ', '_', $row['table_name'])); ?>" style="color: darkblue;"><span class="glyphicon glyphicon-eye-open"></span></a>
 
@@ -95,13 +95,13 @@ $q = mysqli_query($conn, "select * from sales_collection_summary");
 	echo "<tr><td colspan='8'>";
 	if ($pagi > 0) {
 		$last = $pagi - 2;
-		echo "<a href = \"index.php?page=display_member&pagi=$last\">Last 10 Records</a> |";
-		echo "<a href = \"index.php?page=display_member&pagi=$pagi\">Next 10 Records</a>";
+		echo "<a href = \"index.php?page=display_sales_colln&pagi=$last\">Last 10 Records</a> |";
+		echo "<a href = \"index.php?page=display_sales_colln&pagi=$pagi\">Next 10 Records</a>";
 	} else if ($pagi == 0) {
-		echo "<a href = \"index.php?page=display_member&pagi=$pagi\">Next 10 Records</a>";
+		echo "<a href = \"index.php?page=display_sales_colln&pagi=$pagi\">Next 10 Records</a>";
 	} else if ($left_rec < $rec_limit) {
 		$last = $pagi - 2;
-		echo "<a href = \"index.php?page=display_member&pagi=$last\">Last 10 Records</a>";
+		echo "<a href = \"index.php?page=display_sales_colln&pagi=$last\">Last 10 Records</a>";
 	}
 	echo "</td></tr>";
 	?>

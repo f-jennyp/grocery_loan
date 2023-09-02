@@ -10,29 +10,29 @@ if (isset($_GET['name'])) {
 
 ?>
 	<script>
-		function DeleteMember(id) {
-			if (confirm("You want to delete this Member ?")) {
-				window.location.href = "delete_group_member.php?id=" + id;
+		function DeleteLoan(id, tableName) {
+			if (confirm("You want to delete this record?")) {
+				window.location.href = "delete_loan_record.php?id=" + id + "&tableName=" + tableName;
 			}
 		}
-	</script>
-	<h2 align="center">TELCARE, MPC - GROCERY LOAN</h2>
+	</script>	
+	<h2 align="center">TELCARE, MPC - GROCERY LOAN | <?php echo str_replace('_', ' ', $tableName) ?></h2>
 
 	<table class="table table-bordered table-hover table-striped">
 		<!-- Search form -->
 		<tr>
 			<form method="post" action="index.php?page=search_loan">
-				<td colspan="12">
-					<input type="text" placeholder="Search" name="searchMember" class="form-control" required />
+				<td colspan="15">
+					<input type="text" placeholder="Search" name="searchLoan" class="form-control" required />
 				</td>
-				<td colspan="5">
+				<td colspan="3">
 					<input type="submit" value="Search" name="sub" class="btn btn-warning" />
 				</td>
 			</form>
 
 		</tr>
 		<tr>
-			<td colspan="5">
+			<td colspan="18">
 
 				<a title="Add New Loan Records" href="index.php?page=add_loan&table=<?php echo urlencode($tableName); ?>"><button class="btn btn-success btn-sm">Add
 						New Loan <span class="glyphicon glyphicon-plus"></button></a>
@@ -123,9 +123,9 @@ if (isset($_GET['name'])) {
 			echo "<td>" . $row['sc_balance'] . "</td>";
 		?>
 		<Td>
-			<a href="javascript:DeleteMember('<?php echo $row['member_id']; ?>', '<?php echo $row['name']; ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
+			<a href="javascript:DeleteLoan('<?php echo $row['id']; ?>', '<?php echo urlencode($tableName); ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
 
-			<a href="index.php?page=update_group_member&member_id=<?php echo $row['member_id']; ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
+			<a href="index.php?page=update_loan_record&id=<?php echo $row['id']; ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
 
 		</td>
 
@@ -141,13 +141,13 @@ if (isset($_GET['name'])) {
 		echo "<tr><td colspan='8'>";
 		if ($pagi > 0) {
 			$last = $pagi - 2;
-			echo "<a href = \"index.php?page=display_member&pagi=$last\">Last 10 Records</a> |";
-			echo "<a href = \"index.php?page=display_member&pagi=$pagi\">Next 10 Records</a>";
+			echo "<a href = \"index.php?page=display_loan&pagi=$last\">Last 10 Records</a> |";
+			echo "<a href = \"index.php?page=display_loan&pagi=$pagi\">Next 10 Records</a>";
 		} else if ($pagi == 0) {
-			echo "<a href = \"index.php?page=display_member&pagi=$pagi\">Next 10 Records</a>";
+			echo "<a href = \"index.php?page=display_loan&pagi=$pagi\">Next 10 Records</a>";
 		} else if ($left_rec < $rec_limit) {
 			$last = $pagi - 2;
-			echo "<a href = \"index.php?page=display_member&pagi=$last\">Last 10 Records</a>";
+			echo "<a href = \"index.php?page=display_loan&pagi=$last\">Last 10 Records</a>";
 		}
 		echo "</td></tr>";
 		?>

@@ -5,7 +5,7 @@ $q = mysqli_query($conn, "select * from member");
 <script>
 	function DeleteMember(id, memberName) {
 		if (confirm("You want to delete this Member ?")) {
-			window.location.href = "delete_group_member.php?id=" + id + "&memberName=" + memberName;
+			window.location.href = "delete_gl_member.php?id=" + id + "&memberName=" + memberName;
 		}
 	}
 </script>
@@ -91,7 +91,7 @@ $q = mysqli_query($conn, "select * from member");
 		<Td>
 			<a href="javascript:DeleteMember('<?php echo $row['member_id']; ?>', '<?php echo $row['name']; ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
 
-			<a href="index.php?page=update_group_member&member_id=<?php echo $row['member_id']; ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
+			<a href="index.php?page=update_gl_member&member_id=<?php echo $row['member_id']; ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
 
 			<a href="index.php?page=display_loan&name=<?php echo urlencode(str_replace(' ', '_', $row['name'])); ?>" style="color: darkblue;"><span class="glyphicon glyphicon-eye-open"></span></a>
 
@@ -109,13 +109,13 @@ $q = mysqli_query($conn, "select * from member");
 	echo "<tr><td colspan='8'>";
 	if ($pagi > 0) {
 		$last = $pagi - 2;
-		echo "<a href = \"index.php?page=display_member&pagi=$last\">Last 10 Records</a> |";
-		echo "<a href = \"index.php?page=display_member&pagi=$pagi\">Next 10 Records</a>";
+		echo "<a href = \"index.php?page=display_gl_member&pagi=$last\">Last 10 Records</a> |";
+		echo "<a href = \"index.php?page=display_gl_member&pagi=$pagi\">Next 10 Records</a>";
 	} else if ($pagi == 0) {
-		echo "<a href = \"index.php?page=display_member&pagi=$pagi\">Next 10 Records</a>";
+		echo "<a href = \"index.php?page=display_gl_member&pagi=$pagi\">Next 10 Records</a>";
 	} else if ($left_rec < $rec_limit) {
 		$last = $pagi - 2;
-		echo "<a href = \"index.php?page=display_member&pagi=$last\">Last 10 Records</a>";
+		echo "<a href = \"index.php?page=display_gl_member&pagi=$last\">Last 10 Records</a>";
 	}
 	echo "</td></tr>";
 	?>
