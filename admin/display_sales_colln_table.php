@@ -11,12 +11,12 @@ if (isset($_GET['name'])) {
 ?>
 	<script>
 		function DeleteMember(id) {
-			if (confirm("You want to delete this Member ?")) {
-				window.location.href = "delete_group_member.php?id=" + id;
+			if (confirm("You want to delete this row? ?")) {
+				window.location.href = "delete_sales_colln_table.php?id=" + id;
 			}
 		}
 	</script>
-	<h2 align="center">TELCARE, MPC - GROCERY LOAN</h2>
+	<h2 align="center"><?php $tableName ?></h2>
 
 	<table class="table table-bordered table-hover table-striped">
 		<!-- Search form -->
@@ -48,21 +48,14 @@ if (isset($_GET['name'])) {
 		<Tr class="active">
 			<th>#</th>
 			<th>Date</th>
-			<th>Loan Amount</th>
-			<th>Payment Amount</th>
-			<th>Payment OR#</th>
-			<th>Payment Date</th>
-			<th>Amount Balance</th>
-			<th>Laon Balance</th>
-			<th>SC Starts</th>
-			<th>@ 4%</th>
-			<th>SC Dates</th>
-			<th>#Mos.</th>
-			<th>4% SC</th>
-			<th>SC Payments</th>
-			<th>SC OR#</th>
-			<th>SC Date</th>
-			<th>SC Balance</th>
+			<th>OR #</th>
+			<th>Charged Colln</th>
+			<th>Total (Charged Colln)</th>
+			<th>D. Sales for</th>
+			<th>Amount</th>
+			<th>Overage</th>
+			<th>Total</th>
+			<th>c. Total</th>
 			<th>Actions</th>
 
 		</Tr>
@@ -106,21 +99,14 @@ if (isset($_GET['name'])) {
 			echo "<Tr>";
 			echo "<td>" . $inc . "</td>";
 			echo "<td>" . $row['date'] . "</td>";
-			echo "<td>" . $row['loan_amount'] . "</td>";
-			echo "<td>" . $row['payment_amount'] . "</td>";
 			echo "<td>" . $row['or_num'] . "</td>";
-			echo "<td>" . $row['or_date'] . "</td>";
-			echo "<td>" . $row['amount_balance'] . "</td>";
-			echo "<td>" . $row['loan_balance'] . "</td>";
-			echo "<td>" . $row['sc_starts'] . "</td>";
-			echo "<td>" . $row['four_percent'] . "</td>";
-			echo "<td>" . $row['sc_dates'] . "</td>";
-			echo "<td>" . $row['months'] . "</td>";
-			echo "<td>" . $row['four_percent_sc'] . "</td>";
-			echo "<td>" . $row['sc_payments'] . "</td>";
-			echo "<td>" . $row['sc_payments_or_num'] . "</td>";
-			echo "<td>" . $row['sc_payments_date'] . "</td>";
-			echo "<td>" . $row['sc_balance'] . "</td>";
+			echo "<td>" . $row['charged_colln'] . "</td>";
+			echo "<td>" . $row['charged_total'] . "</td>";
+			echo "<td>" . $row['d_sales_for'] . "</td>";
+			echo "<td>" . $row['amount'] . "</td>";
+			echo "<td>" . $row['overage'] . "</td>";
+			echo "<td>" . $row['total'] . "</td>";
+			echo "<td>" . $row['c_total'] . "</td>";
 		?>
 		<Td>
 			<a href="javascript:DeleteMember('<?php echo $row['member_id']; ?>', '<?php echo $row['name']; ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>

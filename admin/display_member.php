@@ -14,16 +14,16 @@ $q = mysqli_query($conn, "select * from member");
 <table class="table table-bordered table-hover table-striped">
 	<tr>
 		<form method="post" action="index.php?page=search_member">
-			<td colspan="4">
+			<td colspan="8">
 				<input type="text" placeholder="Search Member" name="searchMember" class="form-control" required />
 			</td>
-			<td colspan="4">
+			<td colspan="5">
 				<input type="submit" value="Search Member" name="sub" class="btn btn-warning" />
 			</td>
 		</form>
 	</tr>
 	<tr>
-		<td colspan="8"><a href="index.php?page=add_group_member"><button class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Add New Member</button></a></td>
+		<td colspan="8"><a href="index.php?page=add_gl_member"><button class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Add New Member</button></a></td>
 	</tr>
 	<Tr class="active">
 		<th>NO</th>

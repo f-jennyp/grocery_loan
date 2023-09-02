@@ -4,22 +4,6 @@ if (isset($_GET['table'])) {
 
 if (isset($_POST['save'])) {
 	
-		// $date = $_POST['date'];
-		// $loan_amount = $_POST['loan_amount'];
-		// $payment_amount = $_POST['payment_amount'];
-		// $or_num = $_POST['or_num'];
-		// $or_date = $_POST['or_date'];
-		// $amount_balance = $_POST['amount_balance'];
-		// $loan_balance = $_POST['loan_balance'];
-		// $sc_starts = $_POST['sc_starts'];
-		// $four_percent = $_POST['four_percent'];
-		// $sc_dates = $_POST['sc_dates'];
-		// $months = $_POST['months'];
-		// $four_percent_sc = $_POST['four_percent_sc'];
-		// $sc_payments = $_POST['sc_payments'];
-		// $sc_payments_or_num = $_POST['sc_payments_or_num'];
-		// $sc_payments_date = $_POST['sc_payments_date'];
-		// $sc_balance = $_POST['sc_balance'];
 		$date = mysqli_real_escape_string($conn, $_POST['date']);
         $loan_amount = mysqli_real_escape_string($conn, $_POST['loan_amount']);
         $payment_amount = mysqli_real_escape_string($conn, $_POST['payment_amount']);
@@ -83,7 +67,7 @@ if (isset($_POST['save'])) {
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">Payment Amount</div>
 		<div class="col-sm-5">
-			<input type="number" name="payment_amount" class="form-control" />
+			<input type="number" id="payment_amount" name="payment_amount" class="form-control" />
 		</div>
 	</div>
 
@@ -104,9 +88,22 @@ if (isset($_POST['save'])) {
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">Amount Balance</div>
 		<div class="col-sm-5">
-			<input type="number" name="amount_balance" class="form-control" />
+			<input type="number" id="amount_balance" name="amount_balance" class="form-control" readonly />
 		</div>
 	</div>
+
+	<script>
+		// Function to calculate amount balance
+		function calculateAmountBalance() {
+			var loanAmount = document.getElementById('loan_amount').value;
+			var paymentAmount =  document.getElementById('payment_amount').value;
+			var amountBalance = loanAmount - paymentAmount;
+			document.getElementById('amount_balance').value = amountBalance;
+		}
+
+		// Attach the function to the input field's onchange event
+		document.getElementById('payment_amount').addEventListener('input', calculateAmountBalance);
+	</script>
 
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">Loan Balance</div>

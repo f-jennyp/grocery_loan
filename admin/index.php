@@ -80,9 +80,9 @@ header('location:../index.php');
 			
 	<li><a href="index.php"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>		
 	<!-- <li><a href="index.php?page=update_password"><span class="glyphicon glyphicon-lock"></span> Update Password</a></li> -->
-    <li><a href="index.php?page=display_group"><span class="glyphicon glyphicon-user"></span>  Groups</a></li>
+    <li><a href="index.php?page=display_sales_colln"><span class="glyphicon glyphicon-th-list"></span>  Sales Collection Summary</a></li>
 	<li><a href="index.php?page=display_member"><span class="glyphicon glyphicon-user"></span>  Members</a></li>
-	<li><a href="index.php?page=#"><span class="glyphicon glyphicon-table"></span> INSERT NEW</a></li>
+	<li><a href="index.php?page=#"><span class="glyphicon glyphicon-list"></span> INSERT NEW</a></li>
 	<li><a href="index.php?page=display_payment_history"><span class="glyphicon glyphicon-time"></span> Payment</a></li>
 			
             
@@ -96,25 +96,30 @@ header('location:../index.php');
 		@$page=  $_GET['page'];
 		  if($page!="")
 		  {
-		  	if($page=="add_group")
+		  	if($page=="add_sales_colln")
 			{
-				include('add_group.php');
+				include('add_sales_colln.php');
 			
 			}
-		  	if($page=="display_group")
+		  	if($page=="display_sales_colln")
 			{
-				include('display_group.php');
+				include('display_sales_colln.php');
 			
 			}
-			if($page=="search_group")
+			if($page=="display_sales_colln_table")
 			{
-				include('search_group.php');
+				include('display_sales_colln_table.php');
+			
+			}
+			if($page=="search_sales_colln")
+			{
+				include('search_sales_colln.php');
 			
 			}
 			
-			if($page=="update_group")
+			if($page=="update_sales_colln")
 			{
-				include('update_group.php');
+				include('update_sales_colln.php');
 			
 			}
 			if($page=="display_member")
@@ -128,15 +133,15 @@ header('location:../index.php');
 			
 			}
 			
-			if($page=="add_group_member")
+			if($page=="add_gl_member")
 			{
-				include('add_group_member.php');
+				include('add_gl_member.php');
 			
 			}
 			
-			if($page=="update_group_member")
+			if($page=="update_gl_member")
 			{
-				include('update_group_member.php');
+				include('update_gl_member.php');
 			
 			}
 			
