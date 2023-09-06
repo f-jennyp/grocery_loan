@@ -17,7 +17,7 @@ if (!$rr) {
 	<table class="table table-bordered">
 
 		<tr>
-			<td colspan="16"><a href="index.php?page=display_member">Go Back</a></td>
+			<td colspan="16"><a href="index.php?page=display_gl_member">Go Back</a></td>
 		</tr>
 		<Tr class="active">
 			<th>NO</th>
@@ -51,12 +51,12 @@ if (!$rr) {
 		?>
 
 			<Td>
+
 				<a href="javascript:DeleteMember('<?php echo $row['member_id']; ?>', '<?php echo $row['name']; ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
 
-				<a href="index.php?page=update_group_member&member_id=<?php echo $row['member_id']; ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
+				<a href="index.php?page=update_gl_member&member_id=<?php echo $row['member_id']; ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
 
 				<a href="index.php?page=display_loan&name=<?php echo urlencode(str_replace(' ', '_', $row['name'])); ?>" style="color: darkblue;"><span class="glyphicon glyphicon-eye-open"></span></a>
-
 
 			</td>
 		<?php

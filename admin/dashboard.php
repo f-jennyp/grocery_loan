@@ -14,26 +14,26 @@ $r=mysqli_num_rows($q);
 
 
 
-$q1=mysqli_query($conn,"select * from groups ");
-$r1=mysqli_num_rows($q1);
+// $q1=mysqli_query($conn,"select * from groups ");
+// $r1=mysqli_num_rows($q1);
 
 $q7=mysqli_query($conn,"select * from loan");
 $r4=mysqli_num_rows($q7);
 
-$q8=mysqli_query($conn,"select * from payment_history");
-$r8=mysqli_num_rows($q8);
+// $q8=mysqli_query($conn,"select * from payment_history");
+// $r8=mysqli_num_rows($q8);
 
 
 
 ?>
 <h1 class="page-header">Dashboard</h1>
 <div class="row placeholders">
-  <div class="col-xs-6 col-sm-3 placeholder">
+  <!-- <div class="col-xs-6 col-sm-3 placeholder">
     <img src="../images/groupficn.png" width="150" height="150" class="img-responsive"
       alt="Generic placeholder thumbnail">
     <h4>Total Groups</h4>
     <span class="text-muted"><?php echo $r1; ?></span>
-  </div>
+  </div> -->
   <div class="col-xs-6 col-sm-3 placeholder">
     <img src="../images/memberficn.png" width="150" height="150" class="img-responsive"
       alt="Generic placeholder thumbnail">
@@ -45,11 +45,11 @@ $r8=mysqli_num_rows($q8);
     <h4>Loan Alloted</h4>
     <span class="text-muted"><?php echo $r4; ?></span>
   </div>
-  <div class="col-xs-6 col-sm-3 placeholder">
+  <!-- <div class="col-xs-6 col-sm-3 placeholder">
     <img src="../images/paidficn.png" width="150" height="150" class="img-round" alt="Generic placeholder thumbnail">
     <h4>Paid List</h4>
     <span class="text-muted"><?php echo $r8; ?></span>
-  </div>
+  </div> -->
 
 </div>
 

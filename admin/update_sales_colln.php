@@ -1,0 +1,1 @@
+<h2>Update Sales Collection: [table name] </h2>

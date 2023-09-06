@@ -16,7 +16,7 @@ if ($q) {
     $dropTableQuery = "DROP TABLE IF EXISTS $tableName";
     mysqli_query($conn, $dropTableQuery);
 
-    header('location:index.php?page=display_member');
+    header('location:index.php?page=display_gl_member');
 } else {
     // Handle the error, e.g., display an error message
     echo "Error deleting member: " . mysqli_error($conn);

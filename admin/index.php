@@ -80,10 +80,9 @@ header('location:../index.php');
 			
 	<li><a href="index.php"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>		
 	<!-- <li><a href="index.php?page=update_password"><span class="glyphicon glyphicon-lock"></span> Update Password</a></li> -->
-    <li><a href="index.php?page=display_sales_colln"><span class="glyphicon glyphicon-th-list"></span>  Sales Collection Summary</a></li>
 	<li><a href="index.php?page=display_gl_member"><span class="glyphicon glyphicon-user"></span>  Members</a></li>
-	<li><a href="index.php?page=#"><span class="glyphicon glyphicon-list"></span> INSERT NEW</a></li>
-	<li><a href="index.php?page=display_payment_history"><span class="glyphicon glyphicon-time"></span> Payment</a></li>
+    <li><a href="index.php?page=display_sales_colln"><span class="glyphicon glyphicon-th-list"></span>  Sales Collection Summary</a></li>
+	<li><a href="index.php?page=display_charged_cash"><span class="glyphicon glyphicon-th-list"></span> Charged Cash Sales Summary</a></li>
 			
             
           </ul>
@@ -130,6 +129,11 @@ header('location:../index.php');
 			if($page=="display_gl_member")
 			{
 				include('display_gl_member.php');
+			
+			}
+			if($page=="display_charged_cash")
+			{
+				include('display_charged_cash.php');
 			
 			}
 			if($page=="search_member")

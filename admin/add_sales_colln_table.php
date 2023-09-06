@@ -24,8 +24,7 @@ if (isset($_GET['table'])) {
 
             // Execute the SQL query
             if (mysqli_query($conn, $sql)) {
-                $err = "<div class='alert alert-success'>Loan has been allotted successfully!</div>";
-                header('location:index.php?page=display_sales_colln');
+                $err = "<div class='alert alert-success'>Recorded successfully!</div>";
             } else {
                 $err = "<div class='alert alert-danger'>Error: " . mysqli_error($conn) . "</div>";
             }
