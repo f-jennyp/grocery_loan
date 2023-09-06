@@ -2,11 +2,11 @@
 CRUD FUNCTIONS FOR GROCERY LOAN
 
 * MEMBERS:
-Create - done
-Read - done
-Update - error: update remarks
-Delete - done
-Search - done
+  Create - done
+  Read - done
+  Update - error: update remarks
+  Delete - done
+  Search - done
 
 * MEMBER - LOAN:
 Create - done
