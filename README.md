@@ -1,7 +1,7 @@
 # grocery_loan
 CRUD FUNCTIONS FOR GROCERY LOAN
 
-MEMBERS (gl_member):
+MEMBERS:
 * Create (add_gl_member.php) - done
 * Read (display_gl_member.php) - done
 * Update (update_gl_member.php) - error: update remarks
