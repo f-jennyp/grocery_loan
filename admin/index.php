@@ -52,7 +52,7 @@ header('location:../index.php');
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="">Simple Loan Management System</a>
+          <a class="navbar-brand" href="">GROCERY LOAN</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -152,7 +152,7 @@ header('location:../index.php');
 			if($page=="create_colln_table") {
 				include('create_colln_table.php');
 			}
-			
+
 			if($page=="display_colln_table") {
 				include('display_colln_table.php');
 			}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2023 at 04:42 PM
+-- Generation Time: Sep 08, 2023 at 05:20 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -105,10 +105,10 @@ INSERT INTO `jenny_fernandez` (`id`, `date`, `loan_amount`, `payment_amount`, `o
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lilibeth_cruz`
+-- Table structure for table `joel_fernandez`
 --
 
-CREATE TABLE `lilibeth_cruz` (
+CREATE TABLE `joel_fernandez` (
   `id` int(11) NOT NULL,
   `date` date DEFAULT NULL,
   `loan_amount` float DEFAULT NULL,
@@ -179,8 +179,8 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`member_id`, `name`, `unp-gl`, `c-gl`, `s/c`, `amount`, `or#`, `date`, `remarks`) VALUES
-(77, 'Jenny Fernandez', 1000, 0, 0, 0, 2147483647, '2023-09-21', '0'),
-(80, 'Lilibeth Cruz', 236000, 40000, 20000, 23456, 56756754, '2023-09-06', '0');
+(77, 'Jenny Fernandez', 1000, 0, 0, 0, 2147483647, '2023-09-21', 'maganda sya'),
+(91, 'Joel Fernandez', 8000, 1300, 0, 0, 231313, '2023-09-08', 'emerottttt');
 
 -- --------------------------------------------------------
 
@@ -243,9 +243,9 @@ ALTER TABLE `jenny_fernandez`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `lilibeth_cruz`
+-- Indexes for table `joel_fernandez`
 --
-ALTER TABLE `lilibeth_cruz`
+ALTER TABLE `joel_fernandez`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -295,9 +295,9 @@ ALTER TABLE `jenny_fernandez`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `lilibeth_cruz`
+-- AUTO_INCREMENT for table `joel_fernandez`
 --
-ALTER TABLE `lilibeth_cruz`
+ALTER TABLE `joel_fernandez`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -310,13 +310,13 @@ ALTER TABLE `loan`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `sales_collection_summary`
 --
 ALTER TABLE `sales_collection_summary`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `sample_table`
