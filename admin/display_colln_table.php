@@ -11,8 +11,8 @@ if (isset($_GET['name'])) {
 ?>
 	<script>
 		function DeleteMember(id) {
-			if (confirm("You want to delete this row? ?")) {
-				window.location.href = "delete_sales_colln_table.php?id=" + id;
+			if (confirm("You want to delete this record?")) {
+				window.location.href = "delete_colln_table.php?id=" + id;
 			}
 		}
 	</script>
@@ -34,12 +34,12 @@ if (isset($_GET['name'])) {
 		<tr>
 			<td colspan="12">
 
-				<a title="Add New Sales Colln Record" href="index.php?page=add_sales_colln_table&table=<?php echo urlencode($tableName); ?>"><button class="btn btn-success btn-sm">Add
+				<a title="Add New Sales Colln Record" href="index.php?page=create_colln_table&table=<?php echo urlencode($tableName); ?>"><button class="btn btn-success btn-sm">Add
 						New <span class="glyphicon glyphicon-plus"></button></a>
 				&nbsp; &nbsp;
 
 				<!-- Print button -->
-				<a title="Print all Sales Colln Record" href="print_loan_record.php">
+				<a title="Print all Sales Colln Record" href="print_colln_table.php">
 					<button class="btn btn-primary btn-sm">Print <span class="glyphicon glyphicon-print"></span></button>
 				</a>
 			</td>
@@ -109,9 +109,9 @@ if (isset($_GET['name'])) {
 			echo "<td>" . $row['c_total'] . "</td>";
 		?>
 		<Td>
-			<a href="javascript:DeleteMember('<?php echo $row['member_id']; ?>', '<?php echo $row['name']; ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
+			<a href="javascript:DeleteMember('<?php echo $row['id']; ?>', '<?php echo $row['tableName']; ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
 
-			<a href="index.php?page=update_group_member&member_id=<?php echo $row['member_id']; ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
+			<a href="index.php?page=update_colln_table&id=<?php echo $row['id']; ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
 
 		</td>
 

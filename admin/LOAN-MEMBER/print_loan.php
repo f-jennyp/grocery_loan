@@ -1,5 +1,5 @@
 <?php
-include('../connection.php');
+include('../../connection.php');
 if (isset($_GET['table'])) {
     $tableName = mysqli_real_escape_string($conn, urldecode($_GET['table']));
 	$q = mysqli_query($conn, "SELECT * FROM $tableName");

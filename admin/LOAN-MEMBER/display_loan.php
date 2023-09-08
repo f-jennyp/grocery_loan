@@ -12,7 +12,7 @@ if (isset($_GET['name'])) {
 	<script>
 		function DeleteLoan(id, tableName) {
 			if (confirm("You want to delete this record?")) {
-				window.location.href = "delete_loan_record.php?id=" + id + "&tableName=" + tableName;
+				window.location.href = "LOAN-MEMBER/delete_loan.php?id=" + id + "&tableName=" + tableName;
 			}
 		}
 	</script>	
@@ -34,12 +34,12 @@ if (isset($_GET['name'])) {
 		<tr>
 			<td colspan="18">
 
-				<a title="Add New Loan Records" href="index.php?page=add_loan&table=<?php echo urlencode($tableName); ?>"><button class="btn btn-success btn-sm">Add
+				<a title="Add New Loan Records" href="index.php?page=create_loan&table=<?php echo urlencode($tableName); ?>"><button class="btn btn-success btn-sm">Add
 						New Loan <span class="glyphicon glyphicon-plus"></button></a>
 				&nbsp; &nbsp;
 
 				<!-- Print button -->
-				<a title="Print all Loan Records" href="print_loan_record.php">
+				<a title="Print all Loan Records" href="LOAN-MEMBER/print_loan.php">
 					<button class="btn btn-primary btn-sm">Print <span class="glyphicon glyphicon-print"></span></button>
 				</a>
 			</td>
@@ -125,7 +125,7 @@ if (isset($_GET['name'])) {
 		<Td>
 			<a href="javascript:DeleteLoan('<?php echo $row['id']; ?>', '<?php echo urlencode($tableName); ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
 
-			<a href="index.php?page=update_loan_record&id=<?php echo $row['id']; ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
+			<a href="index.php?page=update_loan&id=<?php echo $row['id']; ?>&name=<?php echo urlencode($tableName); ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
 
 		</td>
 

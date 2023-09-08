@@ -5,7 +5,7 @@ $q = mysqli_query($conn, "select * from sales_collection_summary");
 <script>
 	function DeleteTable(id, tableName) {
 		if (confirm("You want to delete this table?")) {
-			window.location.href = "delete_sales_colln.php?id=" + id + "&tableName=" + tableName;
+			window.location.href = "SALES-COLLN/delete_sales_colln.php?id=" + id + "&tableName=" + tableName;
 		}
 	}
 </script>
@@ -23,7 +23,7 @@ $q = mysqli_query($conn, "select * from sales_collection_summary");
 		</form>
 	</tr>
 	<tr>
-		<td colspan="8"><a href="index.php?page=add_sales_colln"><button class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Add New Table</button></a></td>
+		<td colspan="8"><a href="index.php?page=create_sales_colln"><button class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Add New Table</button></a></td>
 	</tr>
 	<Tr class="active">
 		<th>NO</th>
@@ -79,7 +79,7 @@ $q = mysqli_query($conn, "select * from sales_collection_summary");
 
 			<a href="index.php?page=update_sales_colln&id=<?php echo $row['id']; ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
 
-			<a href="index.php?page=display_sales_colln_table&name=<?php echo urlencode(str_replace(' ', '_', $row['table_name'])); ?>" style="color: darkblue;"><span class="glyphicon glyphicon-eye-open"></span></a>
+			<a href="index.php?page=display_colln_table&name=<?php echo urlencode(str_replace(' ', '_', $row['table_name'])); ?>" style="color: darkblue;"><span class="glyphicon glyphicon-eye-open"></span></a>
 
 
 		</td>

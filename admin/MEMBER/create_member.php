@@ -40,7 +40,7 @@ if (isset($_POST['save'])) {
             mysqli_query($conn, $loanTableQuery);
 
             $err = "<div class='alert alert-success'>New member has been added successfully</div>";
-			header('location:index.php?page=display_gl_member');
+			header('location:index.php?page=display_member');
         } else {
             $err = "<div class='alert alert-danger'>This member already exists</div>";
         }

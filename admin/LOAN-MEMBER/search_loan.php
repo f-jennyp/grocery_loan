@@ -16,7 +16,7 @@ else
 	{
 		if(confirm("You want to delete this Record ?"))
 		{
-		window.location.href="delete_loan_record.php?id="+id;
+		window.location.href="LOAN-MEMBER/delete_loan.php?id="+id;
 		}
 	}
 </script>
@@ -61,7 +61,7 @@ echo "<td>".$row['due_date']."</td>";
 ?>
 
 <Td><a href="javascript:Deleteloan('<?php echo $row['loan_id']; ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
-<a href="index.php?page=update_loan_record&loan_id=<?php echo $row['loan_id']; ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a></td>
+<a href="index.php?page=update_loan&loan_id=<?php echo $row['loan_id']; ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a></td>
 <?php 
 
 echo "</Tr>";

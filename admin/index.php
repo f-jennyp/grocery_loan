@@ -79,10 +79,10 @@ header('location:../index.php');
 			
 			
 	<li><a href="index.php"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>		
-	<!-- <li><a href="index.php?page=update_password"><span class="glyphicon glyphicon-lock"></span> Update Password</a></li> -->
-	<li><a href="index.php?page=display_gl_member"><span class="glyphicon glyphicon-user"></span>  Members</a></li>
-    <li><a href="index.php?page=display_sales_colln"><span class="glyphicon glyphicon-th-list"></span>  Sales Collection Summary</a></li>
-	<li><a href="index.php?page=display_charged_cash"><span class="glyphicon glyphicon-th-list"></span> Charged Cash Sales Summary</a></li>
+	<li><a href="index.php?page=display_member"><span class="glyphicon glyphicon-user"></span>  Members</a></li>
+    <li><a href="index.php?page=display_sales_colln"><span class="glyphicon glyphicon-signal"></span>  Sales Collection Summary</a></li>
+	<li><a href="index.php?page=display_charged_cash"><span class="glyphicon glyphicon-credit-card"></span> Charged Cash Sales Summary</a></li>
+	<li><a href="index.php?page=update_password"><span class="glyphicon glyphicon-lock"></span> Update Password</a></li>
 			
             
           </ul>
@@ -95,106 +95,84 @@ header('location:../index.php');
 		@$page=  $_GET['page'];
 		  if($page!="")
 		  {
-		  	if($page=="add_sales_colln")
-			{
-				include('add_sales_colln.php');
-			
+
+			// CREATE MEMBER
+			if($page=="create_member") {
+				include('MEMBER/create_member.php');
 			}
-			if($page=="add_sales_colln_table")
-			{
-				include('add_sales_colln_table.php');
-			
+			// READ/DISPLAY MEMBER
+			if($page=="display_member") {
+				include('MEMBER/display_member.php');
 			}
-		  	if($page=="display_sales_colln")
-			{
-				include('display_sales_colln.php');
-			
+			// UPDATE MEMBER
+			if($page=="update_member") {
+				include('MEMBER/update_member.php');
 			}
-			if($page=="display_sales_colln_table")
-			{
-				include('display_sales_colln_table.php');
-			
+			// SEARCH MEMBER
+			if($page=="search_member") {
+				include('MEMBER/search_member.php');
 			}
-			if($page=="search_sales_colln")
-			{
-				include('search_sales_colln.php');
-			
+
+			// CREATE LOAN-MEMBER
+			if($page=="create_loan") {
+				include('LOAN-MEMBER/create_loan.php');
+			}
+			// READ/DIPLAY LOAN-MEMBER
+			if($page=="display_loan") {
+				include('LOAN-MEMBER/display_loan.php');
+			}
+			// UPDATE LOAN-MEMBER
+			if($page=="update_loan") {
+				include('LOAN-MEMBER/update_loan.php');
+			}
+			// SEARCH LOAN-MEMBER
+			if($page=="search_loan") {
+				include('LOAN-MEMBER/search_loan.php');
+			}
+
+			// CREATE SALES-COLLN
+			if($page=="create_sales_colln") {
+				include('SALES-COLLN/create_sales_colln.php');
+			}
+			// READ/DISPLAY SALES-COLLN
+			if($page=="display_sales_colln") {
+				include('SALES-COLLN/display_sales_colln.php');
+			}
+			// UPDATE SALES-COLLN
+			if($page=="update_sales_colln") {
+				include('SALES-COLLN/update_sales_colln.php');
+			}
+			// SEARCH SALES-COLLN
+			if($page=="search_sales_colln") {
+				include('SALES-COLLN/search_sales_colln.php');
+			}
+
+
+		
+			if($page=="create_colln_table") {
+				include('create_colln_table.php');
 			}
 			
-			if($page=="update_sales_colln")
-			{
-				include('update_sales_colln.php');
-			
+			if($page=="display_colln_table") {
+				include('display_colln_table.php');
 			}
-			if($page=="display_gl_member")
-			{
-				include('display_gl_member.php');
 			
-			}
+			
+
+
 			if($page=="display_charged_cash")
 			{
 				include('display_charged_cash.php');
 			
 			}
-			if($page=="search_member")
-			{
-				include('search_member.php');
 			
-			}
 			
-			if($page=="add_gl_member")
-			{
-				include('add_gl_member.php');
-			
-			}
-			
-			if($page=="update_gl_member")
-			{
-				include('update_gl_member.php');
-			
-			}
-			
-			if($page=="add_loan")
-			{
-				include('add_loan.php');
-			
-			}
-			
-			if($page=="display_loan")
-			{
-				include('display_loan.php');
-			
-			}
-			
-			if($page=="search_loan")
-			{
-				include('search_loan.php');
-			
-			}
-			
-			if($page=="update_loan_record")
-			{
-				include('update_loan_record.php');
-			
-			}
 			
 			if($page=="update_password")
 			{
 				include('update_password.php');
 			
 			}
-			if($page=="print_loan_record")
-			{
-				include('print_loan_record.php');
-			
-			}
-			if($page=="print_loan_record")
-			{
-				include('print_loan_record.php');
-			
-			}
-			
-			
 			
 			
 		  }
