@@ -31,6 +31,7 @@ session_start();
     <meta name="description" content="">
     <meta name="author" content="">
 
+<<<<<<< HEAD
     <title>GL - Login Panel</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -41,6 +42,28 @@ session_start();
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
+=======
+    <title>SLMS - Login Panel</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="css/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+>>>>>>> eca9b32f00ce8c5b313e670d77e0cd0ea90f4bad
 
 </head>
 
@@ -49,7 +72,11 @@ session_start();
     <div class="container" >
         <div class="row" style="margin-top:20px">
             <div class="col-md-4 col-md-offset-4">
+<<<<<<< HEAD
             <h4 class="text-center">Grocery Loan</h4>
+=======
+            <h4 class="text-center">Simple Loan Management System</h4>
+>>>>>>> eca9b32f00ce8c5b313e670d77e0cd0ea90f4bad
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Please Log In to continue...</h3>
@@ -84,9 +111,22 @@ session_start();
         </div>
     </div>
 
+<<<<<<< HEAD
     <script src="css/jquery.min.js"></script>
     <script src="css/bootstrap.min.js"></script>
     <script src="css/metisMenu.min.js"></script>
+=======
+    <!-- jQuery -->
+    <script src="css/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="css/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="css/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+>>>>>>> eca9b32f00ce8c5b313e670d77e0cd0ea90f4bad
     <script src="css/sb-admin-2.js"></script>
 
 </body>
