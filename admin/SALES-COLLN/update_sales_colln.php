@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 if (isset($_GET['table'])) {
     $tableName = mysqli_real_escape_string($conn, urldecode($_GET['table']));
@@ -64,6 +63,3 @@ if (isset($_GET['table'])) {
     </form>
 <?php
 } ?>
-=======
-<h2>Update Sales Collection: [table name] </h2>
->>>>>>> eca9b32f00ce8c5b313e670d77e0cd0ea90f4bad

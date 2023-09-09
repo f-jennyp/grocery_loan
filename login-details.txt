@@ -4,11 +4,4 @@ Database Name: simpleloan
 **Login Details**
 
 Username: admin@mail.com
-<<<<<<< HEAD
 Password: codeastro.com
-=======
-Password: codeastro.com
-
-
-
->>>>>>> eca9b32f00ce8c5b313e670d77e0cd0ea90f4bad
