@@ -19,11 +19,7 @@ LOAN-MEMBER:
 SALES COLLECTION SUMMARY:
 * Create (create_sales_colln.php) - done
 * Read (display_sales_colln.php) - done
-<<<<<<< HEAD
 * Update (update_sales_colln.php) - done
-=======
-* Update (update_sales_colln.php) - not yet started
->>>>>>> eca9b32f00ce8c5b313e670d77e0cd0ea90f4bad
 * Delete (delete_sales_colln.php) - done
 * Search bar - not yet started
 
