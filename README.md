@@ -26,14 +26,14 @@ SALES COLLECTION SUMMARY:
 SALES COLLECTION SUMMARY - TABLE:
 * Create (create_colln_table.php) - done
 * Read (display_colln_table.php) - done
-* Update (update_colln_table.php) - not yet started
-* Delete (delete_colln_table.php) - not yet started
+* Update (update_colln_table.php) - done
+* Delete (delete_colln_table.php) - done
 * Search bar - not yet started
 * Print table - error
 
 CHARGED CASH SALES SUMMARY:
-* Create (add_charged_cash.php) - not yet started
-* Read (display_charged_cash.php) - not yet started
+* Create (add_charged_cash.php) - done
+* Read (display_charged_cash.php) - done
 * Update (update_charged_cash.php) - not yet started
 * Delete (delete_charged_cash.php) - not yet started
 * Search bar

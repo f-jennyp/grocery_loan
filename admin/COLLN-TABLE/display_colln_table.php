@@ -10,9 +10,9 @@ if (isset($_GET['name'])) {
 
 ?>
 	<script>
-		function DeleteMember(id) {
+		function DeleteMember(id, tableName) {
 			if (confirm("You want to delete this record?")) {
-				window.location.href = "COLLN-TABLE/delete_colln_table.php?id=" + id;
+				window.location.href = "COLLN-TABLE/delete_colln_table.php?id=" + id + "&tableName=" + tableName;
 			}
 		}
 	</script>
@@ -109,9 +109,9 @@ if (isset($_GET['name'])) {
 			echo "<td>" . $row['c_total'] . "</td>";
 		?>
 		<Td>
-			<a href="javascript:DeleteMember('<?php echo $row['id']; ?>', '<?php echo $row['tableName']; ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
+			<a href="javascript:DeleteMember('<?php echo $row['id']; ?>', '<?php echo urlencode($tableName); ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
 
-			<a href="index.php?page=update_colln_table&id=<?php echo $row['id']; ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
+			<a href="index.php?page=update_colln_table&id=<?php echo $row['id']; ?>&name=<?php echo urlencode($tableName); ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
 
 		</td>
 

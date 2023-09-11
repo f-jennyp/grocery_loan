@@ -146,13 +146,18 @@ if ($admin == "") {
 						include('COLLN-TABLE/update_colln_table.php');
 					}
 
-
-
-
-					if ($page == "display_charged_cash") {
-						include('display_charged_cash.php');
+					// CREATE CHARGED-CASH
+					if ($page == "create_charged_cash") {
+						include('CHARGED-CASH/create_charged_cash.php');
 					}
-
+					// READ/DISPLAY CHARGED-CASH
+					if ($page == "display_charged_cash") {
+						include('CHARGED-CASH/display_charged_cash.php');
+					}
+					// UPDATE CHARGED-CASH
+					if ($page == "update_charged_cash") {
+						include('CHARGED-CASH/update_charged_cash.php');
+					}
 
 
 					if ($page == "update_password") {
