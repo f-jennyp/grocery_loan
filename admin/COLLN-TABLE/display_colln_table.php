@@ -2,7 +2,7 @@
 if (isset($_GET['name'])) {
 	$tableName = mysqli_real_escape_string($conn, urldecode($_GET['name']));
 
-	$q = mysqli_query($conn, "SELECT * FROM $tableName");
+	$q = mysqli_query($conn, "SELECT * FROM `$tableName`");
 	if (!$q) {
 		echo "Query Error: " . mysqli_error($conn);
 		die();
@@ -68,7 +68,7 @@ if (isset($_GET['name'])) {
 
 		/* Get total number of records */
 
-		$sql = "SELECT count(id) FROM $tableName ";
+		$sql = "SELECT count(id) FROM `$tableName` ";
 		$retval = mysqli_query($conn, $sql);
 
 		if (!$retval) {
@@ -87,7 +87,7 @@ if (isset($_GET['name'])) {
 
 
 		$left_rec = $rec_count - ($pagi * $rec_limit);
-		$sql = "SELECT * " . "FROM $tableName " .
+		$sql = "SELECT * " . "FROM `$tableName` " .
 			"LIMIT $offset, $rec_limit";
 
 		$retval = mysqli_query($conn, $sql);

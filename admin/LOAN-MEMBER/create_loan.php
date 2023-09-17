@@ -43,6 +43,7 @@ if (isset($_GET['table'])) {
 ?>
 
 <h2 align="center">Add Loan Details</h2>
+<span style="color: grey;">Please ensure all required fields are filled or enter '0' where applicable.</span>
 <form method="post">
 
 	<div class="row">
@@ -53,23 +54,23 @@ if (isset($_GET['table'])) {
 	</div>
 
 	<div class="row" style="margin-top:10px">
-		<div class="col-sm-4">Date</div>
+		<div class="col-sm-4">Date <span style="color: red;">*</span></div>
 		<div class="col-sm-5">
 			<input type="date" name="date" class="form-control" required />
 		</div>
 	</div>
 
 	<div class="row" style="margin-top:10px">
-		<div class="col-sm-4">Loan Amount</div>
+		<div class="col-sm-4">Loan Amount <span style="color: red;">*</span></div>
 		<div class="col-sm-5">
 			<input type="float" id="loan_amount" name="loan_amount" class="form-control" required />
 		</div>
 	</div>
 
 	<div class="row" style="margin-top:10px">
-		<div class="col-sm-4">Payment Amount</div>
+		<div class="col-sm-4">Payment Amount <span style="color: red;">*</span></div>
 		<div class="col-sm-5">
-			<input type="float" id="payment_amount" name="payment_amount" class="form-control" />
+			<input type="float" id="payment_amount" name="payment_amount" class="form-control" required />
 		</div>
 	</div>
 
@@ -128,16 +129,12 @@ if (isset($_GET['table'])) {
 		</div>
 	</div>
 
-	<!-- JavaScript to calculate the 4% and update the input field -->
 	<script>
-		// Function to calculate 4% of loan amount
 		function calculateFourPercent() {
 			var loanAmount = parseFloat(document.getElementById('loan_amount').value) || 0;
 			var fourPercent = loanAmount * 0.04;
 			document.getElementById('four_percent').value = fourPercent;
 		}
-
-		// Attach the function to the input field's onchange event
 		document.getElementById('loan_amount').addEventListener('input', calculateFourPercent);
 	</script>
 
@@ -151,21 +148,32 @@ if (isset($_GET['table'])) {
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">Months</div>
 		<div class="col-sm-5">
-			<input type="number" name="months" class="form-control" />
+			<input type="number" id="months" name="months" class="form-control" />
 		</div>
 	</div>
 
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">4% SC</div>
 		<div class="col-sm-5">
-			<input type="float" name="four_percent_sc" class="form-control" />
+			<input type="float" id="four_percent_sc" name="four_percent_sc" class="form-control" readonly />
 		</div>
 	</div>
+
+	<script>
+		function calculateFourPercentSC() {
+			var loanAmount = parseFloat(document.getElementById('loan_amount').value) || 0;
+			var months = parseInt(document.getElementById('months').value) || 0;
+			var fourPercentSC = (loanAmount * 0.04) * months;
+			document.getElementById('four_percent_sc').value = fourPercentSC.toFixed(2); // Limit to 2 decimal places
+		}
+		document.getElementById('months').addEventListener('input', calculateFourPercentSC);
+		document.getElementById('loan_amount').addEventListener('input', calculateFourPercentSC);
+	</script>
 
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">SC Payments</div>
 		<div class="col-sm-5">
-			<input type="float" name="sc_payments" class="form-control" />
+			<input type="float" id="sc_payments" name="sc_payments" class="form-control" />
 		</div>
 	</div>
 
@@ -186,9 +194,23 @@ if (isset($_GET['table'])) {
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">SC Balance</div>
 		<div class="col-sm-5">
-			<input type="float" name="sc_balance" class="form-control" />
+			<input type="float" id="sc_balance" name="sc_balance" class="form-control" readonly/>
 		</div>
 	</div>
+
+	<script>
+		function calculateSCBalance() {
+			var loanAmount = parseFloat(document.getElementById('loan_amount').value) || 0;
+			var months = parseInt(document.getElementById('months').value) || 0;
+			var fourPercentSC = (loanAmount * 0.04) * months;
+			var scPayments = parseFloat(document.getElementById('sc_payments').value) || 0;
+			var scBalance = fourPercentSC - scPayments;
+			document.getElementById('sc_balance').value = scBalance.toFixed(2); // Limit to 2 decimal places
+		}
+		document.getElementById('months').addEventListener('input', calculateSCBalance);
+		document.getElementById('loan_amount').addEventListener('input', calculateSCBalance);
+		document.getElementById('sc_payments').addEventListener('input', calculateSCBalance);
+	</script>
 
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4"></div>

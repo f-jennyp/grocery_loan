@@ -1,38 +1,42 @@
 <?php
+
 if (isset($_POST['save'])) {
 
-    $table_name = mysqli_real_escape_string($conn, $_POST['table_name']);
-    
-    if (empty($table_name)) {
-        $err = "<font color='red'>Fill in all the required fields</font>";
-    } else {
-        $sql = mysqli_query($conn, "SELECT * FROM sales_collection_summary WHERE table_name='$table_name'");
-        $r = mysqli_num_rows($sql);
-        if ($r != true) {
-            mysqli_query($conn, "INSERT INTO sales_collection_summary VALUES('', '$table_name')");
+	$table_name = mysqli_real_escape_string($conn, $_POST['table_name']);
 
-            $newTableName = str_replace(' ', '_', $table_name); // Replace spaces with underscores
-            $loanTableQuery = "CREATE TABLE $newTableName (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                date DATE,
-                or_num INT,
-				charged_colln FLOAT,
-				charged_total FLOAT,
-				d_sales_for FLOAT,
-				amount FLOAT,
-				overage FLOAT,
-				total FLOAT,
-				c_total FLOAT,
+	if (empty($table_name)) {
+		$err = "<font color='red'>Fill in all the required fields</font>";
+	} else {
+		$sql = mysqli_query($conn, "SELECT * FROM sales_collection_summary WHERE table_name='$table_name'");
+		$r = mysqli_num_rows($sql);
+		if ($r != true) {
+			mysqli_query($conn, "INSERT INTO sales_collection_summary VALUES('', '$table_name')");
+
+			$newTableName = str_replace(' ', '_', $table_name);
+			$newTableName = mysqli_real_escape_string($conn, $newTableName); // Escape special characters
+
+			$collnTableQuery = "CREATE TABLE `$newTableName` (
+				`id` INT AUTO_INCREMENT PRIMARY KEY,
+				`date` DATE,
+				`or_num` INT,
+				`charged_colln` FLOAT,
+				`charged_total` FLOAT,
+				`d_sales_for` FLOAT,
+				`amount` FLOAT,
+				`overage` FLOAT,
+				`total` FLOAT,
+				`c_total` FLOAT,
 				UNIQUE (`or_num`)
-				)";
-            mysqli_query($conn, $loanTableQuery);
+			)";
 
-            $err = "<div class='alert alert-success'>New member has been added successfully</div>";
+			mysqli_query($conn, $collnTableQuery);
+
+			$err = "<div class='alert alert-success'>New member has been added successfully</div>";
 			header('location:index.php?page=display_sales_colln');
-        } else {
-            $err = "<div class='alert alert-danger'>This member already exists</div>";
-        }
-    }
+		} else {
+			$err = "<div class='alert alert-danger'>This member already exists</div>";
+		}
+	}
 }
 ?>
 
@@ -61,7 +65,7 @@ if (isset($_POST['save'])) {
 		<div class="col-sm-8">
 
 
-			<input type="submit" value="Add New Member" name="save" class="btn btn-success" />
+			<input type="submit" value="Add New Table" name="save" class="btn btn-success" />
 			<input type="reset" class="btn btn-danger" />
 		</div>
 		<div class="col-sm-4"></div>

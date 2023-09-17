@@ -18,25 +18,26 @@ if (isset($_POST['save'])) {
         if ($r != true) {
             mysqli_query($conn, "INSERT INTO member VALUES('', '$name', '$unpgl', '$cgl', '$sc', '$amount', '$or', '$date', '$remarks')");
 
-            $newTableName = str_replace(' ', '_', $name); // Replace spaces with underscores
-            $loanTableQuery = "CREATE TABLE $newTableName (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                date DATE,
-                loan_amount FLOAT,
-				payment_amount FLOAT,
-                or_num INT,
-				or_date DATE,
-				amount_balance FLOAT,
-				loan_balance FLOAT,
-				sc_starts VARCHAR(255), 
-				four_percent FLOAT,
-				sc_dates VARCHAR(255),
-				months INT,
-				four_percent_sc FLOAT,
-				sc_payments FLOAT,
-				sc_payments_or_num INT,
-				sc_payments_date DATE,
-				sc_balance FLOAT,
+            $newTableName = str_replace(' ', '_', $name);
+			$newTableName = mysqli_real_escape_string($conn, $newTableName); // Escape special characters
+            $loanTableQuery = "CREATE TABLE `$newTableName` (
+                `id` INT AUTO_INCREMENT PRIMARY KEY,
+                `date` DATE,
+                `loan_amount` FLOAT,
+				`payment_amount` FLOAT,
+                `or_num` INT,
+				`or_date` DATE,
+				`amount_balance` FLOAT,
+				`loan_balance` FLOAT,
+				`sc_starts` VARCHAR(255), 
+				`four_percent` FLOAT,
+				`sc_dates` VARCHAR(255),
+				`months` INT,
+				`four_percent_sc` FLOAT,
+				`sc_payments` FLOAT,
+				`sc_payments_or_num` INT,
+				`sc_payments_date` DATE,
+				`sc_balance` FLOAT,
 				UNIQUE (`or_num`)
             )";
             mysqli_query($conn, $loanTableQuery);

@@ -9,7 +9,7 @@ $q = mysqli_query($conn, "select * from sales_collection_summary");
 		}
 	}
 </script>
-<h2>Grocery Loan | Sales Collection Summary</h2>
+<h2>Sales Collection Summary</h2>
 
 <table class="table table-bordered table-hover table-striped">
 	<tr>

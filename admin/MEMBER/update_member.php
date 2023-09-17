@@ -7,7 +7,7 @@ if (isset($_GET['name'])) {
 	if (isset($save)) {
 		$memberId = intval($_GET['member_id']);
 
-		$originalTableName = $tableName;
+		$originalTableName = `$tableName`;
 
 		mysqli_query($conn, "UPDATE member SET  
 		`name` = '$name',
@@ -23,8 +23,8 @@ if (isset($_GET['name'])) {
 
 		$tableName = str_replace(' ', '_', $name);
 
-		if ($originalTableName !== $tableName) {
-			$renameTableQuery = "RENAME TABLE $originalTableName TO $tableName";
+		if ($originalTableName !== `$tableName`) {
+			$renameTableQuery = "RENAME TABLE $originalTableName TO `$tableName`";
 			mysqli_query($conn, $renameTableQuery);
 		}
 
