@@ -22,7 +22,8 @@ if (isset($_POST['save'])) {
 				amount FLOAT,
 				overage FLOAT,
 				total FLOAT,
-				c_total FLOAT
+				c_total FLOAT,
+				UNIQUE (`or_num`)
 				)";
             mysqli_query($conn, $loanTableQuery);
 

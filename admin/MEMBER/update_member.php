@@ -28,7 +28,7 @@ if (isset($_GET['name'])) {
 			mysqli_query($conn, $renameTableQuery);
 		}
 
-		$err = "<font color='blue'>Member Updated</font>";
+		$err = "<font color='blue'>Member updated successfully!</font>";
 		header('location:index.php?page=display_member');
 		exit();
 	}

@@ -8,10 +8,23 @@ if (isset($_GET['name'])) {
         echo "Query Error: " . mysqli_error($conn);
         die();
     }
+    $id = intval($_GET['id']);
+
+    $query = "SELECT charged_total, c_total FROM $tableName WHERE id < $id ORDER BY id DESC LIMIT 1";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $lastCharged_total = isset($row['charged_total']) ? $row['charged_total'] : 0;
+        $lastC_total = isset($row['c_total']) ? $row['c_total'] : 0;
+    } else {
+        $lastCharged_total = 0;
+        $lastC_total = 0;
+    }
 
     extract($_POST);
     if (isset($save)) {
-		$id = intval($_GET['id']);
+        $id = intval($_GET['id']);
 
         mysqli_query($conn, "UPDATE $tableName SET  
             `date` ='$date', 
@@ -26,19 +39,24 @@ if (isset($_GET['name'])) {
             WHERE id='$id'
         ");
 
-        $err = "<font color='blue'>Loan records updated</font>";
+        header("Location: index.php?page=display_colln_table&name=" . urlencode($tableName));
+        exit;
     }
 
     $sql = mysqli_query($conn, "SELECT * FROM $tableName WHERE id='" . $_GET['id'] . "'");
     $res = mysqli_fetch_array($sql);
 }
 ?>
-<h2 align="center">Update Allotted Loan Records</h2>
+<h2 align="center">Update
+    <?php echo str_replace('_', ' ', $tableName) ?> record
+</h2><span style="color: grey;">Please ensure all required fields are filled or enter '0' where applicable.</span>
 <form method="post">
 
     <div class="row">
         <div class="col-sm-4"></div>
-        <div class="col-sm-4"><?php echo @$err; ?></div>
+        <div class="col-sm-4">
+            <?php echo @$err; ?>
+        </div>
     </div>
 
     <div class="row" style="margin-top:10px">
@@ -59,14 +77,16 @@ if (isset($_GET['name'])) {
     <div class="row" style="margin-top:10px">
         <div class="col-sm-4">Charged Colln</div>
         <div class="col-sm-5">
-            <input type="number" value="<?php echo $res['charged_colln']; ?>" name="charged_colln" class="form-control" />
+            <input type="float" value="<?php echo $res['charged_colln']; ?>" id="charged_colln" name="charged_colln"
+                class="form-control" />
         </div>
     </div>
 
     <div class="row" style="margin-top:10px">
         <div class="col-sm-4">Total (Charged Colln)</div>
         <div class="col-sm-5">
-            <input type="number" value="<?php echo $res['charged_total']; ?>" name="charged_total" class="form-control" />
+            <input type="float" value="<?php echo $res['charged_total']; ?>" id="charged_total" name="charged_total"
+                class="form-control" readonly />
         </div>
     </div>
 
@@ -80,40 +100,77 @@ if (isset($_GET['name'])) {
     <div class="row" style="margin-top:10px">
         <div class="col-sm-4">Amount</div>
         <div class="col-sm-5">
-            <input type="number" value="<?php echo $res['amount']; ?>" name="amount" class="form-control" />
+            <input type="float" value="<?php echo $res['amount']; ?>" id="amount" name="amount" class="form-control" />
         </div>
     </div>
 
     <div class="row" style="margin-top:10px">
         <div class="col-sm-4">Overage</div>
         <div class="col-sm-5">
-            <input type="number" value="<?php echo $res['overage']; ?>" name="overage" class="form-control" />
+            <input type="float" value="<?php echo $res['overage']; ?>" name="overage" class="form-control" />
         </div>
     </div>
 
     <div class="row" style="margin-top:10px">
         <div class="col-sm-4">Total</div>
         <div class="col-sm-5">
-            <input type="number" value="<?php echo $res['total']; ?>" name="total" class="form-control" />
+            <input type="float" value="<?php echo $res['total']; ?>" id="total" name="total" class="form-control"
+                readonly />
         </div>
     </div>
 
     <div class="row" style="margin-top:10px">
         <div class="col-sm-4">C Total</div>
         <div class="col-sm-5">
-            <input type="number" value="<?php echo $res['c_total']; ?>" name="c_total" class="form-control" />
+            <input type="float" value="<?php echo $res['c_total']; ?>" id="c_total" name="c_total" class="form-control"
+                readonly />
         </div>
     </div>
 
 
-	<div class="row" style="margin-top:10px">
-		<div class="col-sm-4"></div>
-		<div class="col-sm-4">
-			<input type="submit" value="Update Loan" name="save" class="btn btn-success" />
-			<input type="reset" class="btn btn-danger" />
-		</div>
-		<div class="col-sm-4"></div>
-	</div>
+    <script>
+        function calculateTotal() {
+            var amount = parseFloat(document.getElementById('amount').value) || 0;
+            var overage = parseFloat(document.getElementById('overage').value) || 0;
+            var total = amount + overage;
+            document.getElementById('total').value = total;
+        }
+        document.getElementById('overage').addEventListener('input', calculateTotal);
+    </script>
+
+
+    <script>
+        function calculateCharged_Total() {
+            var charged_colln = parseFloat(document.getElementById('charged_colln').value) || 0;
+            var lastCharged_total = parseFloat(<?php echo $lastCharged_total; ?>) || 0;
+            var charged_total = lastCharged_total + charged_colln;
+            document.getElementById('charged_total').value = charged_total;
+        }
+
+        document.getElementById('charged_colln').addEventListener('input', calculateCharged_Total);
+    </script>
+
+
+    <script>
+        function calculateC_Total() {
+            var amount = parseFloat(document.getElementById('amount').value) || 0;
+            var overage = parseFloat(document.getElementById('overage').value) || 0;
+            var total = amount + overage;
+            var lastC_total = parseFloat(<?php echo $lastC_total; ?>) || 0;
+            var c_total = lastC_total + total;
+            document.getElementById('c_total').value = c_total;
+        }
+
+        document.getElementById('amount').addEventListener('input', calculateC_Total);
+        document.getElementById('overage').addEventListener('input', calculateC_Total);
+    </script>
+
+    <div class="row" style="margin-top:10px">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <input type="submit" value="Update Loan" name="save" class="btn btn-success" />
+            <input type="reset" class="btn btn-danger" />
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
 </form>
-
-

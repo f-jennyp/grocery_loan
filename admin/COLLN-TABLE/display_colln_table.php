@@ -8,38 +8,41 @@ if (isset($_GET['name'])) {
 		die();
 	}
 
-?>
+	?>
 	<script>
-		function DeleteMember(id, tableName) {
+		function DeleteCollnTable(id, tableName) {
 			if (confirm("You want to delete this record?")) {
 				window.location.href = "COLLN-TABLE/delete_colln_table.php?id=" + id + "&tableName=" + tableName;
 			}
 		}
 	</script>
-	<h2 align="center"><?php echo str_replace('_', ' ', $tableName) ?></h2>
+	<h2 align="center">
+		<?php echo str_replace('_', ' ', $tableName) ?>
+	</h2>
 
 	<table class="table table-bordered table-hover table-striped">
 		<!-- Search form -->
 		<tr>
-			<form method="post" action="index.php?page=search_loan">
+			<form method="post" action="index.php?page=search_colln_table&table=<?php echo urlencode($tableName); ?>">
 				<td colspan="9">
-					<input type="text" placeholder="Search" name="searchMember" class="form-control" required />
+					<input type="text" placeholder="Search Date" name="searchCollnTable" class="form-control" required />
 				</td>
 				<td colspan="3">
 					<input type="submit" value="Search" name="sub" class="btn btn-warning" />
 				</td>
 			</form>
-
 		</tr>
 		<tr>
 			<td colspan="12">
 
-				<a title="Add New Sales Colln Record" href="index.php?page=create_colln_table&table=<?php echo urlencode($tableName); ?>"><button class="btn btn-success btn-sm">Add
+				<a title="Add New Sales Colln Record"
+					href="index.php?page=create_colln_table&table=<?php echo urlencode($tableName); ?>"><button
+						class="btn btn-success btn-sm">Add
 						New <span class="glyphicon glyphicon-plus"></button></a>
 				&nbsp; &nbsp;
 
-				<!-- Print button -->
-				<a title="Print all Sales Colln Record" href="print_colln_table.php">
+				<a title="Print all Sales Colln Record"
+					href="COLLN-TABLE/print_colln_table.php?table=<?php echo urlencode($tableName); ?>">
 					<button class="btn btn-primary btn-sm">Print <span class="glyphicon glyphicon-print"></span></button>
 				</a>
 			</td>
@@ -107,15 +110,17 @@ if (isset($_GET['name'])) {
 			echo "<td>" . $row['overage'] . "</td>";
 			echo "<td>" . $row['total'] . "</td>";
 			echo "<td>" . $row['c_total'] . "</td>";
-		?>
-		<Td>
-			<a href="javascript:DeleteMember('<?php echo $row['id']; ?>', '<?php echo urlencode($tableName); ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
+			?>
+			<Td>
+				<a href="javascript:DeleteCollnTable('<?php echo $row['id']; ?>', '<?php echo urlencode($tableName); ?>')"
+					style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
 
-			<a href="index.php?page=update_colln_table&id=<?php echo $row['id']; ?>&name=<?php echo urlencode($tableName); ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
+				<a href="index.php?page=update_colln_table&id=<?php echo $row['id']; ?>&name=<?php echo urlencode($tableName); ?>"
+					style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
 
-		</td>
+			</td>
 
-		<?php
+			<?php
 
 			echo "</Tr>";
 			$inc++;
@@ -123,22 +128,22 @@ if (isset($_GET['name'])) {
 
 
 		//for shoing Pagination
-
-		echo "<tr><td colspan='8'>";
+	
+		echo "<tr><td colspan='12'>";
 		if ($pagi > 0) {
 			$last = $pagi - 2;
-			echo "<a href = \"index.php?page=display_member&pagi=$last\">Last 10 Records</a> |";
-			echo "<a href = \"index.php?page=display_member&pagi=$pagi\">Next 10 Records</a>";
+			echo "<a href=\"index.php?page=display_colln_table&name=" . urlencode($tableName) . "&pagi=$last\">Last 10 Records</a> | ";
+			echo "<a href=\"index.php?page=display_colln_table&name=" . urlencode($tableName) . "&pagi=$pagi\">Next 10 Records</a>";
 		} else if ($pagi == 0) {
-			echo "<a href = \"index.php?page=display_member&pagi=$pagi\">Next 10 Records</a>";
+			echo "<a href=\"index.php?page=display_colln_table&name=" . urlencode($tableName) . "&pagi=$pagi\">Next 10 Records</a>";
 		} else if ($left_rec < $rec_limit) {
 			$last = $pagi - 2;
-			echo "<a href = \"index.php?page=display_member&pagi=$last\">Last 10 Records</a>";
+			echo "<a href=\"index.php?page=display_colln_table&name=" . urlencode($tableName) . "&pagi=$last\">Last 10 Records</a>";
 		}
 		echo "</td></tr>";
 		?>
 
 	</table>
-<?php
+	<?php
 } ?>
-<?php  ?>
+<?php ?>

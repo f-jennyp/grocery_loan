@@ -145,6 +145,10 @@ if ($admin == "") {
 					if ($page == "update_colln_table") {
 						include('COLLN-TABLE/update_colln_table.php');
 					}
+					// SEARCH COLLN-TABLE
+					if ($page == "search_colln_table") {
+						include('COLLN-TABLE/search_colln_table.php');
+					}
 
 					// CREATE CHARGED-CASH
 					if ($page == "create_charged_cash") {
@@ -157,6 +161,28 @@ if ($admin == "") {
 					// UPDATE CHARGED-CASH
 					if ($page == "update_charged_cash") {
 						include('CHARGED-CASH/update_charged_cash.php');
+					}
+					// SEARCH CHARGED-CASH
+					if ($page == "search_charged_cash") {
+						include('CHARGED-CASH/search_charged_cash.php');
+					}
+
+
+					// CREATE CASH-TABLE
+					if ($page == "create_cash_table") {
+						include('CASH-TABLE/create_cash_table.php');
+					}
+					// READ/DISPLAY CASH-TABLE
+					if ($page == "display_cash_table") {
+						include('CASH-TABLE/display_cash_table.php');
+					}
+					// UPDATE CASH-TABLE
+					if ($page == "update_cash_table") {
+						include('CASH-TABLE/update_cash_table.php');
+					}
+					// SEARCH CASH-TABLE
+					if ($page == "search_cash_table") {
+						include('CASH-TABLE/search_cash_table.php');
 					}
 
 

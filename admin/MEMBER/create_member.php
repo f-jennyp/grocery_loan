@@ -7,6 +7,7 @@ if (isset($_POST['save'])) {
     $sc = intval($_POST['sc']);
     $amount = floatval($_POST['amount']);
     $or = intval($_POST['or']);
+	$date = intval($_POST['date']);
     $remarks = mysqli_real_escape_string($conn, $_POST['remarks']);
 
     if (empty($name)) {
@@ -15,7 +16,7 @@ if (isset($_POST['save'])) {
         $sql = mysqli_query($conn, "SELECT * FROM member WHERE name='$name'");
         $r = mysqli_num_rows($sql);
         if ($r != true) {
-            mysqli_query($conn, "INSERT INTO member VALUES('', '$name', '$unpgl', '$cgl', '$sc', '$amount', '$or', now(), '$remarks')");
+            mysqli_query($conn, "INSERT INTO member VALUES('', '$name', '$unpgl', '$cgl', '$sc', '$amount', '$or', '$date', '$remarks')");
 
             $newTableName = str_replace(' ', '_', $name); // Replace spaces with underscores
             $loanTableQuery = "CREATE TABLE $newTableName (
@@ -35,12 +36,13 @@ if (isset($_POST['save'])) {
 				sc_payments FLOAT,
 				sc_payments_or_num INT,
 				sc_payments_date DATE,
-				sc_balance FLOAT
+				sc_balance FLOAT,
+				UNIQUE (`or_num`)
             )";
             mysqli_query($conn, $loanTableQuery);
 
-            $err = "<div class='alert alert-success'>New member has been added successfully</div>";
 			header('location:index.php?page=display_member');
+			exit;
         } else {
             $err = "<div class='alert alert-danger'>This member already exists</div>";
         }
@@ -70,21 +72,21 @@ if (isset($_POST['save'])) {
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">UNP-GL</div>
 		<div class="col-sm-5">
-			<input type="number" name="unpgl" class="form-control" />
+			<input type="number" name="unpgl" class="form-control" readonly/>
 		</div>
 	</div>
 
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">C-GL</div>
 		<div class="col-sm-5">
-			<input type="number" name="cgl" class="form-control" />
+			<input type="number" name="cgl" class="form-control" readonly/>
 		</div>
 	</div>
 
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">S/C</div>
 		<div class="col-sm-5">
-			<input type="number" name="sc" class="form-control" />
+			<input type="number" name="sc" class="form-control" readonly/>
 		</div>
 	</div>
 

@@ -1,6 +1,20 @@
 <?php
 $q = mysqli_query($conn, "select * from member");
 
+function getLastPaymentAmount($conn, $tableName)
+{
+    $query = "SELECT payment_amount FROM $tableName ORDER BY date DESC LIMIT 1";
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['payment_amount'];
+    } else {
+        // If no payment_amount found or empty, return 0
+        return 0;
+    }
+}
+
 ?>
 <script>
 	function DeleteMember(id, memberName) {
@@ -23,7 +37,8 @@ $q = mysqli_query($conn, "select * from member");
 		</form>
 	</tr>
 	<tr>
-		<td colspan="8"><a href="index.php?page=create_member"><button class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Add New Member</button></a></td>
+		<td colspan="8"><a href="index.php?page=create_member"><button class="btn btn-success btn-sm"><span
+						class="glyphicon glyphicon-plus"></span> Add New Member</button></a></td>
 	</tr>
 	<Tr class="active">
 		<th>NO</th>
@@ -41,8 +56,6 @@ $q = mysqli_query($conn, "select * from member");
 	<?php
 	error_reporting(1);
 	$rec_limit = 10;
-
-	/* Get total number of records */
 
 	$sql = "SELECT count(member_id) FROM member ";
 	$retval = mysqli_query($conn, $sql);
@@ -72,13 +85,27 @@ $q = mysqli_query($conn, "select * from member");
 		die('Could not get data: ' . mysqli_error($conn));
 	}
 
+	
+
 	$inc = 1;
 	while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
 
 		echo "<Tr>";
 		echo "<td>" . $inc . "</td>";
 		echo "<td>" . $row['name'] . "</td>";
-		echo "<td>" . $row['unp-gl'] . "</td>";
+		//echo "<td>" . $row['unp-gl'] . "</td>";
+		echo "<td>";
+
+        // Get the table name for the member
+        $tableName = str_replace(' ', '_', $row['name']);
+
+        // Get the last payment_amount for the member
+        $lastPaymentAmount = getLastPaymentAmount($conn, $tableName);
+
+        // Display the last payment_amount or 0 if empty
+        echo empty($lastPaymentAmount) ? 0 : $lastPaymentAmount;
+
+        echo "</td>";
 		echo "<td>" . $row['c-gl'] . "</td>";
 		echo "<td>" . $row['s/c'] . "</td>";
 		echo "<td>" . $row['amount'] . "</td>";
@@ -86,18 +113,21 @@ $q = mysqli_query($conn, "select * from member");
 		echo "<td>" . $row['date'] . "</td>";
 		echo "<td>" . $row['remarks'] . "</td>";
 
-	?>
+		?>
 
 		<Td>
-			<a href="javascript:DeleteMember('<?php echo $row['member_id']; ?>', '<?php echo $row['name']; ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
+			<a href="javascript:DeleteMember('<?php echo $row['member_id']; ?>', '<?php echo $row['name']; ?>')"
+				style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
 
-			<a href="index.php?page=update_member&member_id=<?php echo $row['member_id']; ?>&name=<?php echo urlencode(str_replace(' ', '_', $row['name'])); ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
+			<a href="index.php?page=update_member&member_id=<?php echo $row['member_id']; ?>&name=<?php echo urlencode(str_replace(' ', '_', $row['name'])); ?>"
+				style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
 
-			<a href="index.php?page=display_loan&name=<?php echo urlencode(str_replace(' ', '_', $row['name'])); ?>" style="color: darkblue;"><span class="glyphicon glyphicon-eye-open"></span></a>
+			<a href="index.php?page=display_loan&name=<?php echo urlencode(str_replace(' ', '_', $row['name'])); ?>"
+				style="color: darkblue;"><span class="glyphicon glyphicon-eye-open"></span></a>
 
 
 		</td>
-	<?php
+		<?php
 
 		echo "</Tr>";
 		$inc++;
@@ -105,7 +135,7 @@ $q = mysqli_query($conn, "select * from member");
 
 
 	//for shoing Pagination
-
+	
 	echo "<tr><td colspan='8'>";
 	if ($pagi > 0) {
 		$last = $pagi - 2;
@@ -121,4 +151,4 @@ $q = mysqli_query($conn, "select * from member");
 	?>
 
 </table>
-<?php  ?>
+<?php ?>

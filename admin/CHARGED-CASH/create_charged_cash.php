@@ -17,7 +17,8 @@ if (isset($_POST['save'])) {
                 `date` DATE,
 				`charged_invoice` FLOAT,
 				`amount` FLOAT,
-				`total` FLOAT
+				`total` FLOAT,
+				UNIQUE (`charged_invoice`)
 				)";
             mysqli_query($conn, $loanTableQuery);
 

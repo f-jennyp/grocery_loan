@@ -8,22 +8,25 @@ if (isset($_GET['name'])) {
 		die();
 	}
 
-?>
+	?>
 	<script>
 		function DeleteLoan(id, tableName) {
 			if (confirm("You want to delete this record?")) {
 				window.location.href = "LOAN-MEMBER/delete_loan.php?id=" + id + "&tableName=" + tableName;
 			}
 		}
-	</script>	
-	<h2 align="center">TELCARE, MPC - GROCERY LOAN | <?php echo str_replace('_', ' ', $tableName) ?></h2>
+	</script>
+	<h2 align="center">TELCARE, MPC - GROCERY LOAN |
+		<?php echo str_replace('_', ' ', $tableName) ?>
+	</h2>
 
 	<table class="table table-bordered table-hover table-striped">
 		<!-- Search form -->
 		<tr>
-			<form method="post" action="index.php?page=search_loan">
+			<form method="post" action="index.php?page=search_loan&table=<?php echo urlencode($tableName); ?>">
 				<td colspan="15">
-					<input type="text" placeholder="Search" name="searchLoan" class="form-control" required />
+					<input type="text" placeholder="Search Date or Payment OR#" name="searchLoan" class="form-control"
+						required />
 				</td>
 				<td colspan="3">
 					<input type="submit" value="Search" name="sub" class="btn btn-warning" />
@@ -34,12 +37,15 @@ if (isset($_GET['name'])) {
 		<tr>
 			<td colspan="18">
 
-				<a title="Add New Loan Records" href="index.php?page=create_loan&table=<?php echo urlencode($tableName); ?>"><button class="btn btn-success btn-sm">Add
+				<a title="Add New Loan Records"
+					href="index.php?page=create_loan&table=<?php echo urlencode($tableName); ?>"><button
+						class="btn btn-success btn-sm">Add
 						New Loan <span class="glyphicon glyphicon-plus"></button></a>
 				&nbsp; &nbsp;
 
 				<!-- Print button -->
-				<a title="Print all Loan Records" href="LOAN-MEMBER/print_loan.php">
+				<a title="Print all Loan Records"
+					href="LOAN-MEMBER/print_loan.php?table=<?php echo urlencode($tableName); ?>">
 					<button class="btn btn-primary btn-sm">Print <span class="glyphicon glyphicon-print"></span></button>
 				</a>
 			</td>
@@ -121,15 +127,17 @@ if (isset($_GET['name'])) {
 			echo "<td>" . $row['sc_payments_or_num'] . "</td>";
 			echo "<td>" . $row['sc_payments_date'] . "</td>";
 			echo "<td>" . $row['sc_balance'] . "</td>";
-		?>
-		<Td>
-			<a href="javascript:DeleteLoan('<?php echo $row['id']; ?>', '<?php echo urlencode($tableName); ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
+			?>
+			<Td>
+				<a href="javascript:DeleteLoan('<?php echo $row['id']; ?>', '<?php echo urlencode($tableName); ?>')"
+					style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
 
-			<a href="index.php?page=update_loan&id=<?php echo $row['id']; ?>&name=<?php echo urlencode($tableName); ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
+				<a href="index.php?page=update_loan&id=<?php echo $row['id']; ?>&name=<?php echo urlencode($tableName); ?>"
+					style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
 
-		</td>
+			</td>
 
-		<?php
+			<?php
 
 			echo "</Tr>";
 			$inc++;
@@ -137,22 +145,23 @@ if (isset($_GET['name'])) {
 
 
 		//for shoing Pagination
+	
 
-		echo "<tr><td colspan='8'>";
+		echo "<tr><td colspan='18'>";
 		if ($pagi > 0) {
 			$last = $pagi - 2;
-			echo "<a href = \"index.php?page=display_loan&pagi=$last\">Last 10 Records</a> |";
-			echo "<a href = \"index.php?page=display_loan&pagi=$pagi\">Next 10 Records</a>";
+			echo "<a href=\"index.php?page=display_loan&name=" . urlencode($tableName) . "&pagi=$last\">Last 10 Records</a> | ";
+			echo "<a href=\"index.php?page=display_loan&name=" . urlencode($tableName) . "&pagi=$pagi\">Next 10 Records</a>";
 		} else if ($pagi == 0) {
-			echo "<a href = \"index.php?page=display_loan&pagi=$pagi\">Next 10 Records</a>";
+			echo "<a href=\"index.php?page=display_loan&name=" . urlencode($tableName) . "&pagi=$pagi\">Next 10 Records</a>";
 		} else if ($left_rec < $rec_limit) {
 			$last = $pagi - 2;
-			echo "<a href = \"index.php?page=display_loan&pagi=$last\">Last 10 Records</a>";
+			echo "<a href=\"index.php?page=display_loan&name=" . urlencode($tableName) . "&pagi=$last\">Last 10 Records</a>";
 		}
 		echo "</td></tr>";
 		?>
 
 	</table>
-<?php
+	<?php
 } ?>
-<?php  ?>
+<?php ?>

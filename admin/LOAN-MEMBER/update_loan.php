@@ -1,19 +1,19 @@
 <?php
 
 if (isset($_GET['name'])) {
-    $tableName = mysqli_real_escape_string($conn, urldecode($_GET['name']));
+	$tableName = mysqli_real_escape_string($conn, urldecode($_GET['name']));
 
-    $q = mysqli_query($conn, "SELECT * FROM $tableName");
-    if (!$q) {
-        echo "Query Error: " . mysqli_error($conn);
-        die();
-    }
+	$q = mysqli_query($conn, "SELECT * FROM $tableName");
+	if (!$q) {
+		echo "Query Error: " . mysqli_error($conn);
+		die();
+	}
 
-    extract($_POST);
-    if (isset($save)) {
+	extract($_POST);
+	if (isset($save)) {
 		$id = intval($_GET['id']);
 
-        mysqli_query($conn, "UPDATE $tableName SET  
+		mysqli_query($conn, "UPDATE $tableName SET  
             date='$date', 
             loan_amount='$loan_amount', 
             payment_amount='$payment_amount', 
@@ -33,60 +33,68 @@ if (isset($_GET['name'])) {
             WHERE id='$id'
         ");
 
-        $err = "<font color='blue'>Loan records updated</font>";
-    }
+		header("Location: index.php?page=display_loan&name=" . urlencode($tableName));
+		exit;
+	}
 
-    $sql = mysqli_query($conn, "SELECT * FROM $tableName WHERE id='" . $_GET['id'] . "'");
-    $res = mysqli_fetch_array($sql);
+	$sql = mysqli_query($conn, "SELECT * FROM $tableName WHERE id='" . $_GET['id'] . "'");
+	$res = mysqli_fetch_array($sql);
 }
 ?>
-<h2 align="center">Update Allotted Loan Records</h2>
+<h2 align="center">Update
+	<?php echo str_replace('_', ' ', $tableName) ?> record
+</h2>
 <form method="post">
 
-    <div class="row">
-        <div class="col-sm-4"></div>
-        <div class="col-sm-4"><?php echo @$err; ?></div>
-    </div>
-
-    <div class="row" style="margin-top:10px">
-        <div class="col-sm-4">DATE</div>
-        <div class="col-sm-5">
-            <input type="date" value="<?php echo $res['date']; ?>" name="date" class="form-control" />
-        </div>
-    </div>
-
-    <div class="row" style="margin-top:10px">
-        <div class="col-sm-4">Loan Amount</div>
-        <div class="col-sm-5">
-            <input type="number" value="<?php echo $res['loan_amount']; ?>" name="loan_amount" class="form-control" />
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4">
+			<?php echo @$err; ?>
+		</div>
+	</div>
 
 	<div class="row" style="margin-top:10px">
-        <div class="col-sm-4">Payment Amount</div>
-        <div class="col-sm-5">
-            <input type="number" value="<?php echo $res['payment_amount']; ?>" name="payment_amount" class="form-control" />
-        </div>
-    </div>
+		<div class="col-sm-4">DATE</div>
+		<div class="col-sm-5">
+			<input type="date" value="<?php echo $res['date']; ?>" name="date" class="form-control" />
+		</div>
+	</div>
 
 	<div class="row" style="margin-top:10px">
-        <div class="col-sm-4">OR #</div>
-        <div class="col-sm-5">
-            <input type="number" value="<?php echo $res['or_num']; ?>" name="or_num" class="form-control" />
-        </div>
-    </div>
+		<div class="col-sm-4">Loan Amount</div>
+		<div class="col-sm-5">
+			<input type="float" value="<?php echo $res['loan_amount']; ?>" id="loan_amount" name="loan_amount"
+				class="form-control" />
+		</div>
+	</div>
 
 	<div class="row" style="margin-top:10px">
-        <div class="col-sm-4">OR DATE</div>
-        <div class="col-sm-5">
-            <input type="date" value="<?php echo $res['or_date']; ?>" name="or_date" class="form-control" />
-        </div>
-    </div>
+		<div class="col-sm-4">Payment Amount</div>
+		<div class="col-sm-5">
+			<input type="float" value="<?php echo $res['payment_amount']; ?>" id="payment_amount" name="payment_amount"
+				class="form-control" />
+		</div>
+	</div>
+
+	<div class="row" style="margin-top:10px">
+		<div class="col-sm-4">OR #</div>
+		<div class="col-sm-5">
+			<input type="number" value="<?php echo $res['or_num']; ?>" name="or_num" class="form-control" />
+		</div>
+	</div>
+
+	<div class="row" style="margin-top:10px">
+		<div class="col-sm-4">OR DATE</div>
+		<div class="col-sm-5">
+			<input type="date" value="<?php echo $res['or_date']; ?>" name="or_date" class="form-control" />
+		</div>
+	</div>
 
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">Amount Balance</div>
 		<div class="col-sm-5">
-			<input type="number" value="<?php echo $res['amount_balance']; ?>" id="amount_balance" name="amount_balance" class="form-control" readonly />
+			<input type="float" value="<?php echo $res['amount_balance']; ?>" id="amount_balance" name="amount_balance"
+				class="form-control" readonly />
 		</div>
 	</div>
 
@@ -94,7 +102,7 @@ if (isset($_GET['name'])) {
 		// Function to calculate amount balance
 		function calculateAmountBalance() {
 			var loanAmount = document.getElementById('loan_amount').value;
-			var paymentAmount =  document.getElementById('payment_amount').value;
+			var paymentAmount = document.getElementById('payment_amount').value;
 			var amountBalance = loanAmount - paymentAmount;
 			document.getElementById('amount_balance').value = amountBalance;
 		}
@@ -106,7 +114,7 @@ if (isset($_GET['name'])) {
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">Loan Balance</div>
 		<div class="col-sm-5">
-			<input type="number" value="<?php echo $res['loan_balance']; ?>" name="loan_balance" class="form-control" />
+			<input type="float" value="<?php echo $res['loan_balance']; ?>" name="loan_balance" class="form-control" />
 		</div>
 	</div>
 
@@ -120,7 +128,8 @@ if (isset($_GET['name'])) {
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">@ 4%</div>
 		<div class="col-sm-5">
-			<input type="number" value="<?php echo $res['four_percent']; ?>" id="four_percent" name="four_percent" class="form-control" readonly />
+			<input type="float" value="<?php echo $res['four_percent']; ?>" id="four_percent" name="four_percent"
+				class="form-control" readonly />
 		</div>
 	</div>
 
@@ -154,35 +163,38 @@ if (isset($_GET['name'])) {
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">4% SC</div>
 		<div class="col-sm-5">
-			<input type="number" value="<?php echo $res['four_percent_sc']; ?>" name="four_percent_sc" class="form-control" />
+			<input type="float" value="<?php echo $res['four_percent_sc']; ?>" name="four_percent_sc"
+				class="form-control" />
 		</div>
 	</div>
 
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">SC Payments</div>
 		<div class="col-sm-5">
-			<input type="number" value="<?php echo $res['sc_payments']; ?>" name="sc_payments" class="form-control" />
+			<input type="float" value="<?php echo $res['sc_payments']; ?>" name="sc_payments" class="form-control" />
 		</div>
 	</div>
 
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">SC OR#</div>
 		<div class="col-sm-5">
-			<input type="number" value="<?php echo $res['sc_payments_or_num']; ?>" name="sc_payments_or_num" class="form-control" />
+			<input type="number" value="<?php echo $res['sc_payments_or_num']; ?>" name="sc_payments_or_num"
+				class="form-control" />
 		</div>
 	</div>
 
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">SC Date</div>
 		<div class="col-sm-5">
-			<input type="date" value="<?php echo $res['sc_payments_date']; ?>" name="sc_payments_date" class="form-control" />
+			<input type="date" value="<?php echo $res['sc_payments_date']; ?>" name="sc_payments_date"
+				class="form-control" />
 		</div>
 	</div>
 
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">SC Balance</div>
 		<div class="col-sm-5">
-			<input type="number" value="<?php echo $res['sc_balance']; ?>" name="sc_balance" class="form-control" />
+			<input type="float" value="<?php echo $res['sc_balance']; ?>" name="sc_balance" class="form-control" />
 		</div>
 	</div>
 
@@ -195,5 +207,3 @@ if (isset($_GET['name'])) {
 		<div class="col-sm-4"></div>
 	</div>
 </form>
-
-

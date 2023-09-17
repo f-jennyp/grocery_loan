@@ -1,44 +1,44 @@
 <?php
 if (isset($_GET['table'])) {
-    $tableName = mysqli_real_escape_string($conn, urldecode($_GET['table']));
+	$tableName = mysqli_real_escape_string($conn, urldecode($_GET['table']));
 
-if (isset($_POST['save'])) {
-	
+	if (isset($_POST['save'])) {
+
 		$date = mysqli_real_escape_string($conn, $_POST['date']);
-        $loan_amount = mysqli_real_escape_string($conn, $_POST['loan_amount']);
-        $payment_amount = mysqli_real_escape_string($conn, $_POST['payment_amount']);
-        $or_num = mysqli_real_escape_string($conn, $_POST['or_num']);
-        $or_date = mysqli_real_escape_string($conn, $_POST['or_date']);
-        $amount_balance = mysqli_real_escape_string($conn, $_POST['amount_balance']);
-        $loan_balance = mysqli_real_escape_string($conn, $_POST['loan_balance']);
-        $sc_starts = mysqli_real_escape_string($conn, $_POST['sc_starts']);
-        $four_percent = mysqli_real_escape_string($conn, $_POST['four_percent']);
-        $sc_dates = mysqli_real_escape_string($conn, $_POST['sc_dates']);
-        $months = mysqli_real_escape_string($conn, $_POST['months']);
-        $four_percent_sc = mysqli_real_escape_string($conn, $_POST['four_percent_sc']);
-        $sc_payments = mysqli_real_escape_string($conn, $_POST['sc_payments']);
-        $sc_payments_or_num = mysqli_real_escape_string($conn, $_POST['sc_payments_or_num']);
-        $sc_payments_date = mysqli_real_escape_string($conn, $_POST['sc_payments_date']);
-        $sc_balance = mysqli_real_escape_string($conn, $_POST['sc_balance']);
-
+		$loan_amount = mysqli_real_escape_string($conn, $_POST['loan_amount']);
+		$payment_amount = mysqli_real_escape_string($conn, $_POST['payment_amount']);
+		$or_num = mysqli_real_escape_string($conn, $_POST['or_num']);
+		$or_date = mysqli_real_escape_string($conn, $_POST['or_date']);
+		$amount_balance = mysqli_real_escape_string($conn, $_POST['amount_balance']);
+		$loan_balance = mysqli_real_escape_string($conn, $_POST['loan_balance']);
+		$sc_starts = mysqli_real_escape_string($conn, $_POST['sc_starts']);
+		$four_percent = mysqli_real_escape_string($conn, $_POST['four_percent']);
+		$sc_dates = mysqli_real_escape_string($conn, $_POST['sc_dates']);
+		$months = mysqli_real_escape_string($conn, $_POST['months']);
+		$four_percent_sc = mysqli_real_escape_string($conn, $_POST['four_percent_sc']);
+		$sc_payments = mysqli_real_escape_string($conn, $_POST['sc_payments']);
+		$sc_payments_or_num = mysqli_real_escape_string($conn, $_POST['sc_payments_or_num']);
+		$sc_payments_date = mysqli_real_escape_string($conn, $_POST['sc_payments_date']);
+		$sc_balance = mysqli_real_escape_string($conn, $_POST['sc_balance']);
+		// $lastAmountBalance = $amount_balance;
 
 		if (empty($date) || empty($loan_amount)) {
 			// || empty($loan_amount) || empty($payment_amount) || empty($or_num) || empty($or_date) || empty($amount_balance) || empty($loan_balance) || empty($sc_starts) || empty($four_percent) || empty($sc_dates) || empty($months) || empty($four_percent_sc)) {
 			$err = "<font color='red'>Fill in all the required fields</font>";
 		} else {
-		
+
 			$sql = "INSERT INTO $tableName (date, loan_amount, payment_amount, or_num, or_date, amount_balance, loan_balance, sc_starts, four_percent, sc_dates, months, four_percent_sc, sc_payments, sc_payments_or_num, sc_payments_date, sc_balance) VALUES (
                 '$date', '$loan_amount', '$payment_amount', '$or_num', '$or_date', '$amount_balance', '$loan_balance', '$sc_starts', '$four_percent', '$sc_dates', '$months', '$four_percent_sc', '$sc_payments', '$sc_payments_or_num', '$sc_payments_date', '$sc_balance'
             )";
 
-            // Execute the SQL query
-            if (mysqli_query($conn, $sql)) {
-                $err = "<div class='alert alert-success'>Loan has been allotted successfully!</div>";
-            } else {
-                $err = "<div class='alert alert-danger'>Error: " . mysqli_error($conn) . "</div>";
-            }
-        }
-    }
+			if (mysqli_query($conn, $sql)) {
+				header("Location: index.php?page=display_loan&name=" . urlencode($tableName));
+				exit;
+			} else {
+				$err = "<div class='alert alert-danger'>Error: " . mysqli_error($conn) . "</div>";
+			}
+		}
+	}
 }
 ?>
 
@@ -47,7 +47,9 @@ if (isset($_POST['save'])) {
 
 	<div class="row">
 		<div class="col-sm-4"></div>
-		<div class="col-sm-4"><?php echo @$err; ?></div>
+		<div class="col-sm-4">
+			<?php echo @$err; ?>
+		</div>
 	</div>
 
 	<div class="row" style="margin-top:10px">
@@ -60,14 +62,14 @@ if (isset($_POST['save'])) {
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">Loan Amount</div>
 		<div class="col-sm-5">
-			<input type="number" id="loan_amount" name="loan_amount" class="form-control" />
+			<input type="float" id="loan_amount" name="loan_amount" class="form-control" required />
 		</div>
 	</div>
 
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">Payment Amount</div>
 		<div class="col-sm-5">
-			<input type="number" id="payment_amount" name="payment_amount" class="form-control" />
+			<input type="float" id="payment_amount" name="payment_amount" class="form-control" />
 		</div>
 	</div>
 
@@ -88,15 +90,15 @@ if (isset($_POST['save'])) {
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">Amount Balance</div>
 		<div class="col-sm-5">
-			<input type="number" id="amount_balance" name="amount_balance" class="form-control" readonly />
+			<input type="float" id="amount_balance" name="amount_balance" class="form-control" readonly />
 		</div>
 	</div>
 
 	<script>
 		// Function to calculate amount balance
 		function calculateAmountBalance() {
-			var loanAmount = document.getElementById('loan_amount').value;
-			var paymentAmount =  document.getElementById('payment_amount').value;
+			var loanAmount = parseFloat(document.getElementById('loan_amount').value) || 0;
+			var paymentAmount = parseFloat(document.getElementById('payment_amount').value) || 0;
 			var amountBalance = loanAmount - paymentAmount;
 			document.getElementById('amount_balance').value = amountBalance;
 		}
@@ -108,7 +110,7 @@ if (isset($_POST['save'])) {
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">Loan Balance</div>
 		<div class="col-sm-5">
-			<input type="number" name="loan_balance" class="form-control" />
+			<input type="float" name="loan_balance" class="form-control" />
 		</div>
 	</div>
 
@@ -122,7 +124,7 @@ if (isset($_POST['save'])) {
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">@ 4%</div>
 		<div class="col-sm-5">
-			<input type="number" id="four_percent" name="four_percent" class="form-control" readonly />
+			<input type="float" id="four_percent" name="four_percent" class="form-control" readonly />
 		</div>
 	</div>
 
@@ -130,7 +132,7 @@ if (isset($_POST['save'])) {
 	<script>
 		// Function to calculate 4% of loan amount
 		function calculateFourPercent() {
-			var loanAmount = document.getElementById('loan_amount').value;
+			var loanAmount = parseFloat(document.getElementById('loan_amount').value) || 0;
 			var fourPercent = loanAmount * 0.04;
 			document.getElementById('four_percent').value = fourPercent;
 		}
@@ -156,14 +158,14 @@ if (isset($_POST['save'])) {
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">4% SC</div>
 		<div class="col-sm-5">
-			<input type="number" name="four_percent_sc" class="form-control" />
+			<input type="float" name="four_percent_sc" class="form-control" />
 		</div>
 	</div>
 
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">SC Payments</div>
 		<div class="col-sm-5">
-			<input type="number" name="sc_payments" class="form-control" />
+			<input type="float" name="sc_payments" class="form-control" />
 		</div>
 	</div>
 
@@ -184,7 +186,7 @@ if (isset($_POST['save'])) {
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">SC Balance</div>
 		<div class="col-sm-5">
-			<input type="number" name="sc_balance" class="form-control" />
+			<input type="float" name="sc_balance" class="form-control" />
 		</div>
 	</div>
 

@@ -13,30 +13,38 @@ LOAN-MEMBER:
 * Read (display_loan.php) - done
 * Update (update_loan.php) - done
 * Delete (delete_loan.php) - done
-* Search bar - not yet started
-* Print table - error
+* Search bar - done
+* Print table - done
 
 SALES COLLECTION SUMMARY:
 * Create (create_sales_colln.php) - done
 * Read (display_sales_colln.php) - done
 * Update (update_sales_colln.php) - done
 * Delete (delete_sales_colln.php) - done
-* Search bar - not yet started
+* Search bar - done
 
 SALES COLLECTION SUMMARY - TABLE:
 * Create (create_colln_table.php) - done
 * Read (display_colln_table.php) - done
 * Update (update_colln_table.php) - done
 * Delete (delete_colln_table.php) - done
-* Search bar - not yet started
-* Print table - error
+* Search bar - done
+* Print table - done
 
 CHARGED CASH SALES SUMMARY:
 * Create (add_charged_cash.php) - done
 * Read (display_charged_cash.php) - done
-* Update (update_charged_cash.php) - not yet started
-* Delete (delete_charged_cash.php) - not yet started
-* Search bar
+* Update (update_charged_cash.php) - done
+* Delete (delete_charged_cash.php) - done
+* Search bar - done
 
-UPDATE PASSWORD - Error
+CHARGED CASH SALES SUMMARY - TABLE:
+* Create (add_cash_table.php) - done
+* Read (display_cash_table.php) - done
+* Update (update_cash_table.php) - done
+* Delete (delete_cash_table.php) - done
+* Search bar - done
+* Print table - done
+
+UPDATE PASSWORD - done
 

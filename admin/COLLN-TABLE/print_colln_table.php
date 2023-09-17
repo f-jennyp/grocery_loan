@@ -40,23 +40,16 @@ if (isset($_GET['table'])) {
 			</th>
 		</tr>
 		<Tr class="active">
-			<th>No</th>
+        <th>#</th>
 			<th>Date</th>
-			<th>Loan Amount</th>
-			<th>Payment Amount</th>
-			<th>Payment OR#</th>
-			<th>Payment Date</th>
-			<th>Amount Balance</th>
-			<th>Loan Balance</th>
-			<th>SC Starts</th>
-			<th>@ 4%</th>
-			<th>SC Dates</th>
-			<th>#Mos.</th>
-			<th>4% SC</th>
-			<th>SC Payments</th>
-			<th>SC OR#</th>
-			<th>SC Date</th>
-			<th>SC Balance</th>
+			<th>OR #</th>
+			<th>Charged Colln</th>
+			<th>Total (Charged Colln)</th>
+			<th>D. Sales for</th>
+			<th>Amount</th>
+			<th>Overage</th>
+			<th>Total</th>
+			<th>C. Total</th>
 		</Tr>
 		<?php
 
@@ -66,25 +59,17 @@ if (isset($_GET['table'])) {
 
 			echo "<tr>";
 			echo "<td>" . $i . "</td>";
-			echo "<td>" . $row['date'] . "</td>";
-			echo "<td>" . $row['loan_amount'] . "</td>";
-			echo "<td>" . $row['payment_amount'] . "</td>";
+            echo "<td>" . $row['date'] . "</td>";
 			echo "<td>" . $row['or_num'] . "</td>";
-			echo "<td>" . $row['or_date'] . "</td>";
-			echo "<td>" . $row['amount_balance'] . "</td>";
-			echo "<td>" . $row['loan_balance'] . "</td>";
-			echo "<td>" . $row['sc_starts'] . "</td>";
-			echo "<td>" . $row['four_percent'] . "</td>";
-			echo "<td>" . $row['sc_dates'] . "</td>";
-			echo "<td>" . $row['months'] . "</td>";
-			echo "<td>" . $row['four_percent_sc'] . "</td>";
-			echo "<td>" . $row['sc_payments'] . "</td>";
-			echo "<td>" . $row['sc_payments_or_num'] . "</td>";
-			echo "<td>" . $row['sc_payments_date'] . "</td>";
-			echo "<td>" . $row['sc_balance'] . "</td>";
+			echo "<td>" . $row['charged_colln'] . "</td>";
+			echo "<td>" . $row['charged_total'] . "</td>";
+			echo "<td>" . $row['d_sales_for'] . "</td>";
+			echo "<td>" . $row['amount'] . "</td>";
+			echo "<td>" . $row['overage'] . "</td>";
+			echo "<td>" . $row['total'] . "</td>";
+			echo "<td>" . $row['c_total'] . "</td>";
 			echo "</tr>";
 			$i++;
-
 			?>
 
 			<?php

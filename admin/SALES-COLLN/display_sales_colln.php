@@ -15,7 +15,7 @@ $q = mysqli_query($conn, "select * from sales_collection_summary");
 	<tr>
 		<form method="post" action="index.php?page=search_sales_colln">
 			<td colspan="5">
-				<input type="text" placeholder="Search" name="searchSalesColln" class="form-control" required />
+				<input type="text" placeholder="Search table" name="searchSalesColln" class="form-control" required />
 			</td>
 			<td colspan="3">
 				<input type="submit" value="Search" name="sub" class="btn btn-warning" />
@@ -23,7 +23,8 @@ $q = mysqli_query($conn, "select * from sales_collection_summary");
 		</form>
 	</tr>
 	<tr>
-		<td colspan="8"><a href="index.php?page=create_sales_colln"><button class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Add New Table</button></a></td>
+		<td colspan="8"><a href="index.php?page=create_sales_colln"><button class="btn btn-success btn-sm"><span
+						class="glyphicon glyphicon-plus"></span> Add New Table</button></a></td>
 	</tr>
 	<Tr class="active">
 		<th>NO</th>
@@ -72,18 +73,21 @@ $q = mysqli_query($conn, "select * from sales_collection_summary");
 		echo "<td>" . $inc . "</td>";
 		echo "<td>" . $row['table_name'] . "</td>";
 
-	?>
+		?>
 
 		<Td>
-			<a href="javascript:DeleteTable('<?php echo $row['id']; ?>', '<?php echo $row['table_name']; ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
+			<a href="javascript:DeleteTable('<?php echo $row['id']; ?>', '<?php echo $row['table_name']; ?>')"
+				style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
 
-			<a href="index.php?page=update_sales_colln&id=<?php echo $row['id']; ?>&table=<?php echo urlencode(str_replace(' ', '_', $row['table_name'])); ?>"  style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
+			<a href="index.php?page=update_sales_colln&id=<?php echo $row['id']; ?>&table=<?php echo urlencode(str_replace(' ', '_', $row['table_name'])); ?>"
+				style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
 
-			<a href="index.php?page=display_colln_table&name=<?php echo urlencode(str_replace(' ', '_', $row['table_name'])); ?>" style="color: darkblue;"><span class="glyphicon glyphicon-eye-open"></span></a>
+			<a href="index.php?page=display_colln_table&name=<?php echo urlencode(str_replace(' ', '_', $row['table_name'])); ?>"
+				style="color: darkblue;"><span class="glyphicon glyphicon-eye-open"></span></a>
 
 
 		</td>
-	<?php
+		<?php
 
 		echo "</Tr>";
 		$inc++;
@@ -91,7 +95,7 @@ $q = mysqli_query($conn, "select * from sales_collection_summary");
 
 
 	//for shoing Pagination
-
+	
 	echo "<tr><td colspan='8'>";
 	if ($pagi > 0) {
 		$last = $pagi - 2;
@@ -107,4 +111,4 @@ $q = mysqli_query($conn, "select * from sales_collection_summary");
 	?>
 
 </table>
-<?php  ?>
+<?php ?>
