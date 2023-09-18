@@ -3,7 +3,7 @@
 if (isset($_GET['name'])) {
 	$tableName = mysqli_real_escape_string($conn, urldecode($_GET['name']));
 
-	$q = mysqli_query($conn, "SELECT * FROM $tableName");
+	$q = mysqli_query($conn, "SELECT * FROM `$tableName`");
 	if (!$q) {
 		echo "Query Error: " . mysqli_error($conn);
 		die();
@@ -13,31 +13,31 @@ if (isset($_GET['name'])) {
 	if (isset($save)) {
 		$id = intval($_GET['id']);
 
-		mysqli_query($conn, "UPDATE $tableName SET  
-            date='$date', 
-            loan_amount='$loan_amount', 
-            payment_amount='$payment_amount', 
-            or_num='$or_num', 
-            or_date='$or_date', 
-            amount_balance='$amount_balance', 
-            loan_balance='$loan_balance', 
-            sc_starts='$sc_starts', 
-            four_percent='$four_percent', 
-            sc_dates='$sc_dates', 
-            months='$months', 
-            four_percent_sc='$four_percent_sc', 
-            sc_payments='$sc_payments', 
-            sc_payments_or_num='$sc_payments_or_num', 
-            sc_payments_date='$sc_payments_date', 
-            sc_balance='$sc_balance'
-            WHERE id='$id'
+		mysqli_query($conn, "UPDATE `$tableName` SET  
+            `date`='$date', 
+            `loan_amount`='$loan_amount', 
+            `payment_amount`='$payment_amount', 
+            `or_num`='$or_num', 
+            `or_date`='$or_date', 
+            `amount_balance`='$amount_balance', 
+            `loan_balance`='$loan_balance', 
+            `sc_starts`='$sc_starts', 
+            `four_percent`='$four_percent', 
+            `sc_dates`='$sc_dates', 
+            `months`='$months', 
+            `four_percent_sc`='$four_percent_sc', 
+            `sc_payments`='$sc_payments', 
+            `sc_payments_or_num`='$sc_payments_or_num', 
+            `sc_payments_date`='$sc_payments_date', 
+            `sc_balance`='$sc_balance'
+            WHERE `id`='$id'
         ");
 
 		header("Location: index.php?page=display_loan&name=" . urlencode($tableName));
 		exit;
 	}
 
-	$sql = mysqli_query($conn, "SELECT * FROM $tableName WHERE id='" . $_GET['id'] . "'");
+	$sql = mysqli_query($conn, "SELECT * FROM `$tableName` WHERE id='" . $_GET['id'] . "'");
 	$res = mysqli_fetch_array($sql);
 }
 ?>
@@ -54,14 +54,14 @@ if (isset($_GET['name'])) {
 	</div>
 
 	<div class="row" style="margin-top:10px">
-		<div class="col-sm-4">DATE</div>
+		<div class="col-sm-4">DATE <span style="color: red;">*</span></div>
 		<div class="col-sm-5">
 			<input type="date" value="<?php echo $res['date']; ?>" name="date" class="form-control" />
 		</div>
 	</div>
 
 	<div class="row" style="margin-top:10px">
-		<div class="col-sm-4">Loan Amount</div>
+		<div class="col-sm-4">Loan Amount <span style="color: red;">*</span></div>
 		<div class="col-sm-5">
 			<input type="float" value="<?php echo $res['loan_amount']; ?>" id="loan_amount" name="loan_amount"
 				class="form-control" />
@@ -69,7 +69,7 @@ if (isset($_GET['name'])) {
 	</div>
 
 	<div class="row" style="margin-top:10px">
-		<div class="col-sm-4">Payment Amount</div>
+		<div class="col-sm-4">Payment Amount <span style="color: red;">*</span></div>
 		<div class="col-sm-5">
 			<input type="float" value="<?php echo $res['payment_amount']; ?>" id="payment_amount" name="payment_amount"
 				class="form-control" />
@@ -133,16 +133,12 @@ if (isset($_GET['name'])) {
 		</div>
 	</div>
 
-	<!-- JavaScript to calculate the 4% and update the input field -->
 	<script>
-		// Function to calculate 4% of loan amount
 		function calculateFourPercent() {
 			var loanAmount = document.getElementById('loan_amount').value;
 			var fourPercent = loanAmount * 0.04;
 			document.getElementById('four_percent').value = fourPercent;
 		}
-
-		// Attach the function to the input field's onchange event
 		document.getElementById('loan_amount').addEventListener('input', calculateFourPercent);
 	</script>
 
@@ -156,22 +152,33 @@ if (isset($_GET['name'])) {
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">Months</div>
 		<div class="col-sm-5">
-			<input type="number" value="<?php echo $res['months']; ?>" name="months" class="form-control" />
+			<input type="number" value="<?php echo $res['months']; ?>" id="months" name="months" class="form-control" />
 		</div>
 	</div>
 
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">4% SC</div>
 		<div class="col-sm-5">
-			<input type="float" value="<?php echo $res['four_percent_sc']; ?>" name="four_percent_sc"
-				class="form-control" />
+			<input type="float" value="<?php echo $res['four_percent_sc']; ?>" id="four_percent_sc" name="four_percent_sc"
+				class="form-control" readonly />
 		</div>
 	</div>
+
+	<script>
+		function calculateFourPercentSC() {
+			var loanAmount = parseFloat(document.getElementById('loan_amount').value) || 0;
+			var months = parseInt(document.getElementById('months').value) || 0;
+			var fourPercentSC = (loanAmount * 0.04) * months;
+			document.getElementById('four_percent_sc').value = fourPercentSC.toFixed(2); // Limit to 2 decimal places
+		}
+		document.getElementById('months').addEventListener('input', calculateFourPercentSC);
+		document.getElementById('loan_amount').addEventListener('input', calculateFourPercentSC);
+	</script>
 
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">SC Payments</div>
 		<div class="col-sm-5">
-			<input type="float" value="<?php echo $res['sc_payments']; ?>" name="sc_payments" class="form-control" />
+			<input type="float" value="<?php echo $res['sc_payments']; ?>" id="sc_payments" name="sc_payments" class="form-control" />
 		</div>
 	</div>
 
@@ -194,9 +201,23 @@ if (isset($_GET['name'])) {
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4">SC Balance</div>
 		<div class="col-sm-5">
-			<input type="float" value="<?php echo $res['sc_balance']; ?>" name="sc_balance" class="form-control" />
+			<input type="float" value="<?php echo $res['sc_balance']; ?>" id="sc_balance" name="sc_balance" class="form-control" readonly />
 		</div>
 	</div>
+
+	<script>
+		function calculateSCBalance() {
+			var loanAmount = parseFloat(document.getElementById('loan_amount').value) || 0;
+			var months = parseInt(document.getElementById('months').value) || 0;
+			var fourPercentSC = (loanAmount * 0.04) * months;
+			var scPayments = parseFloat(document.getElementById('sc_payments').value) || 0;
+			var scBalance = fourPercentSC - scPayments;
+			document.getElementById('sc_balance').value = scBalance.toFixed(2); // Limit to 2 decimal places
+		}
+		document.getElementById('months').addEventListener('input', calculateSCBalance);
+		document.getElementById('loan_amount').addEventListener('input', calculateSCBalance);
+		document.getElementById('sc_payments').addEventListener('input', calculateSCBalance);
+	</script>
 
 	<div class="row" style="margin-top:10px">
 		<div class="col-sm-4"></div>

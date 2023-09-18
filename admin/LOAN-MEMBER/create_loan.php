@@ -27,7 +27,7 @@ if (isset($_GET['table'])) {
 			$err = "<font color='red'>Fill in all the required fields</font>";
 		} else {
 
-			$sql = "INSERT INTO $tableName (date, loan_amount, payment_amount, or_num, or_date, amount_balance, loan_balance, sc_starts, four_percent, sc_dates, months, four_percent_sc, sc_payments, sc_payments_or_num, sc_payments_date, sc_balance) VALUES (
+			$sql = "INSERT INTO `$tableName` (date, loan_amount, payment_amount, or_num, or_date, amount_balance, loan_balance, sc_starts, four_percent, sc_dates, months, four_percent_sc, sc_payments, sc_payments_or_num, sc_payments_date, sc_balance) VALUES (
                 '$date', '$loan_amount', '$payment_amount', '$or_num', '$or_date', '$amount_balance', '$loan_balance', '$sc_starts', '$four_percent', '$sc_dates', '$months', '$four_percent_sc', '$sc_payments', '$sc_payments_or_num', '$sc_payments_date', '$sc_balance'
             )";
 

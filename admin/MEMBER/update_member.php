@@ -2,29 +2,28 @@
 if (isset($_GET['name'])) {
 	$tableName = mysqli_real_escape_string($conn, urldecode($_GET['name']));
 
-
 	extract($_POST);
 	if (isset($save)) {
 		$memberId = intval($_GET['member_id']);
 
-		$originalTableName = `$tableName`;
+		$originalTableName = $tableName;
 
 		mysqli_query($conn, "UPDATE member SET  
-		`name` = '$name',
-		`unp-gl` = '$unpgl',
-		`c-gl` = '$cgl',
-		`s/c` = '$sc',
-		`amount` = '$amount',
-		`or#` = '$or',
-		`date` = '$date',
-		`remarks` = '$remarks'
-		WHERE `member_id`='$memberId'
-		 ");
+        `name` = '$name',
+        `unp-gl` = '$unpgl',
+        `c-gl` = '$cgl',
+        `s/c` = '$sc',
+        `amount` = '$amount',
+        `or#` = '$or',
+        `date` = '$date',
+        `remarks` = '$remarks'
+        WHERE `member_id`='$memberId'
+         ");
 
 		$tableName = str_replace(' ', '_', $name);
 
-		if ($originalTableName !== `$tableName`) {
-			$renameTableQuery = "RENAME TABLE $originalTableName TO `$tableName`";
+		if ($originalTableName !== $tableName) {
+			$renameTableQuery = "RENAME TABLE `$originalTableName` TO `$tableName`";
 			mysqli_query($conn, $renameTableQuery);
 		}
 
@@ -35,6 +34,7 @@ if (isset($_GET['name'])) {
 
 	$sql = mysqli_query($conn, "SELECT * FROM member WHERE member_id='" . $_GET['member_id'] . "'");
 	$res = mysqli_fetch_array($sql);
+
 
 
 ?>
@@ -51,7 +51,7 @@ if (isset($_GET['name'])) {
 		<div class="row" style="margin-top:10px">
 			<div class="col-sm-4">Name</div>
 			<div class="col-sm-5">
-				<input type="text" value="<?php echo $res['name']; ?>" name="name" class="form-control" />
+				<input type="text" value="<?php echo $res['name']; ?>" name="name" class="form-control" required />
 			</div>
 		</div>
 
@@ -59,21 +59,21 @@ if (isset($_GET['name'])) {
 		<div class="row" style="margin-top:10px">
 			<div class="col-sm-4">UNP-GL</div>
 			<div class="col-sm-5">
-				<input type="number" value="<?php echo $res['unp-gl']; ?>" name="unpgl" class="form-control" />
+				<input type="number" value="<?php echo $res['unp-gl']; ?>" name="unpgl" class="form-control" readonly />
 			</div>
 		</div>
 
 		<div class="row" style="margin-top:10px">
 			<div class="col-sm-4">C-GL</div>
 			<div class="col-sm-5">
-				<input type="number" value="<?php echo $res['c-gl']; ?>" name="cgl" class="form-control" />
+				<input type="number" value="<?php echo $res['c-gl']; ?>" name="cgl" class="form-control" readonly />
 			</div>
 		</div>
 
 		<div class="row" style="margin-top:10px">
 			<div class="col-sm-4">S/C</div>
 			<div class="col-sm-5">
-				<input type="number" value="<?php echo $res['s/c']; ?>" name="sc" class="form-control" />
+				<input type="number" value="<?php echo $res['s/c']; ?>" name="sc" class="form-control" readonly />
 			</div>
 		</div>
 

@@ -2,7 +2,7 @@
 include('../../connection.php');
 if (isset($_GET['table'])) {
 	$tableName = mysqli_real_escape_string($conn, urldecode($_GET['table']));
-	$q = mysqli_query($conn, "SELECT * FROM $tableName");
+	$q = mysqli_query($conn, "SELECT * FROM `$tableName`");
 	if (!$q) {
 		echo "Query Error: " . mysqli_error($conn);
 		die();
@@ -66,6 +66,7 @@ if (isset($_GET['table'])) {
 
 			echo "<tr>";
 			echo "<td>" . $i . "</td>";
+			// echo "<td>" . $row['id'] . "</td>";
 			echo "<td>" . $row['date'] . "</td>";
 			echo "<td>" . $row['loan_amount'] . "</td>";
 			echo "<td>" . $row['payment_amount'] . "</td>";
@@ -83,7 +84,6 @@ if (isset($_GET['table'])) {
 			echo "<td>" . $row['sc_payments_date'] . "</td>";
 			echo "<td>" . $row['sc_balance'] . "</td>";
 			echo "</tr>";
-			$i++;
 
 			?>
 

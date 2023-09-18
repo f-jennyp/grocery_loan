@@ -2,7 +2,7 @@
 if (isset($_GET['table'])) {
     $tableName = mysqli_real_escape_string($conn, urldecode($_GET['table']));
 
-    $query = "SELECT charged_total, c_total FROM $tableName ORDER BY id DESC LIMIT 1";
+    $query = "SELECT charged_total, c_total FROM `$tableName` ORDER BY id DESC LIMIT 1";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
@@ -32,7 +32,7 @@ if (isset($_GET['table'])) {
             $err = "<font color='red'>Fill in all the required fields or enter 0 </font>";
         } else {
 
-            $sql = "INSERT INTO $tableName (date, or_num, charged_colln, charged_total, d_sales_for, amount, overage, total, c_total) VALUES (
+            $sql = "INSERT INTO `$tableName` (date, or_num, charged_colln, charged_total, d_sales_for, amount, overage, total, c_total) VALUES (
                 '$date', '$or_num', '$charged_colln', '$charged_total', '$d_sales_for', '$amount', '$overage', '$total', '$c_total' )";
 
             // Execute the SQL query
@@ -60,23 +60,23 @@ if (isset($_GET['table'])) {
     </div>
 
     <div class="row" style="margin-top:10px">
-        <div class="col-sm-4">Date</div>
+        <div class="col-sm-4">Date <span style="color: red;">*</span></div>
         <div class="col-sm-5">
             <input type="date" name="date" class="form-control" required />
         </div>
     </div>
 
     <div class="row" style="margin-top:10px">
-        <div class="col-sm-4">OR #</div>
+        <div class="col-sm-4">OR # <span style="color: red;">*</span></div>
         <div class="col-sm-5">
             <input type="number" name="or_num" class="form-control" required />
         </div>
     </div>
 
     <div class="row" style="margin-top:10px">
-        <div class="col-sm-4">Charged Colln</div>
+        <div class="col-sm-4">Charged Colln <span style="color: red;">*</span></div>
         <div class="col-sm-5">
-            <input type="float" id="charged_colln" name="charged_colln" class="form-control" />
+            <input type="float" id="charged_colln" name="charged_colln" class="form-control" required/>
         </div>
     </div>
 
@@ -96,14 +96,14 @@ if (isset($_GET['table'])) {
 
 
     <div class="row" style="margin-top:10px">
-        <div class="col-sm-4">Amount</div>
+        <div class="col-sm-4">Amount <span style="color: red;">*</span></div>
         <div class="col-sm-5">
             <input type="float" id="amount" name="amount" class="form-control" required />
         </div>
     </div>
 
     <div class="row" style="margin-top:10px">
-        <div class="col-sm-4">Overage</div>
+        <div class="col-sm-4">Overage <span style="color: red;">*</span></div>
         <div class="col-sm-5">
             <input type="float" id="overage" name="overage" class="form-control" required />
         </div>
@@ -128,7 +128,7 @@ if (isset($_GET['table'])) {
             var amount = parseFloat(document.getElementById('amount').value) || 0;
             var overage = parseFloat(document.getElementById('overage').value) || 0;
             var total = amount + overage;
-            document.getElementById('total').value = total;
+            document.getElementById('total').value = total.toFixed(2);;
         }
         document.getElementById('overage').addEventListener('input', calculateTotal);
     </script>
@@ -139,8 +139,8 @@ if (isset($_GET['table'])) {
             var charged_colln = parseFloat(document.getElementById('charged_colln').value) || 0;
             var lastCharged_total = parseFloat(<?php echo $lastCharged_total; ?>) || 0;
             var charged_total = lastCharged_total + charged_colln;
-            document.getElementById('charged_total').value = charged_total;
-        }
+            document.getElementById('charged_total').value = charged_total.toFixed(2); // Limit to 2 decimal places
+		}
 
         document.getElementById('charged_colln').addEventListener('input', calculateCharged_Total);
     </script>
@@ -153,7 +153,7 @@ if (isset($_GET['table'])) {
             var total = amount + overage;
             var lastC_total = parseFloat(<?php echo $lastC_total; ?>) || 0;
             var c_total = lastC_total + total;
-            document.getElementById('c_total').value = c_total;
+            document.getElementById('c_total').value = c_total.toFixed(2);;
         }
 
         document.getElementById('amount').addEventListener('input', calculateC_Total);

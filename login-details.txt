@@ -1,5 +1,4 @@
-Database Name: simpleloan
-
+Database Name: grocery_loan
 
 **Login Details**
 

@@ -25,7 +25,7 @@ if (isset($_GET['name'])) {
 		<tr>
 			<form method="post" action="index.php?page=search_colln_table&table=<?php echo urlencode($tableName); ?>">
 				<td colspan="9">
-					<input type="text" placeholder="Search Date" name="searchCollnTable" class="form-control" required />
+					<input type="text" placeholder="Search Date or OR#" name="searchCollnTable" class="form-control" required />
 				</td>
 				<td colspan="3">
 					<input type="submit" value="Search" name="sub" class="btn btn-warning" />
