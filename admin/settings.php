@@ -40,27 +40,27 @@ if (isset($save)) {
 
 
 
-	<div class="row">
+	<div class="row" style="margin-top:15px">
 		<div class="col-sm-4">Enter Your Old Password</div>
 		<div class="col-sm-5">
 			<input type="password" name="op" class="form-control" />
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row" style="margin-top:15px">
 		<div class="col-sm-4">Enter New Password</div>
 		<div class="col-sm-5">
 			<input type="password" name="np" class="form-control" />
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row" style="margin-top:15px">
 		<div class="col-sm-4">Confirm Password</div>
 		<div class="col-sm-5">
 			<input type="password" name="cp" class="form-control" />
 		</div>
 	</div>
-	<div class="row" style="margin-top:10px">
+	<div class="row" style="margin-top:15px">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-8">
 
@@ -69,4 +69,11 @@ if (isset($save)) {
 			<input type="reset" class="btn btn-danger" />
 		</div>
 	</div>
+	
 </form>
+
+
+<div style="text-align: center; margin-top: 50px; color:gray; font-size: 11px">
+    &copy; 2023 Jenny-F. All Rights Reserved.
+</div>
+

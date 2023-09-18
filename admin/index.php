@@ -69,7 +69,7 @@ if ($admin == "") {
 					<li><a href="index.php?page=display_member"><span class="glyphicon glyphicon-user"></span> Members</a></li>
 					<li><a href="index.php?page=display_sales_colln"><span class="glyphicon glyphicon-signal"></span> Sales Collection Summary</a></li>
 					<li><a href="index.php?page=display_charged_cash"><span class="glyphicon glyphicon-credit-card"></span> Charged Cash Sales Summary</a></li>
-					<li><a href="index.php?page=update_password"><span class="glyphicon glyphicon-lock"></span> Update Password</a></li>
+					<li><a href="index.php?page=settings"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
 
 
 				</ul>
@@ -186,8 +186,8 @@ if ($admin == "") {
 					}
 
 
-					if ($page == "update_password") {
-						include('update_password.php');
+					if ($page == "settings") {
+						include('settings.php');
 					}
 				} else {
 					include('dashboard.php');

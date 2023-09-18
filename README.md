@@ -47,5 +47,4 @@ CHARGED CASH SALES SUMMARY - TABLE: - need some changes
 * Search bar - done
 * Print table - done
 
-UPDATE PASSWORD - done - need some layout changes
-
+UPDATE PASSWORD/ SETTINGS - done
