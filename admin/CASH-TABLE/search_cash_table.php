@@ -4,7 +4,7 @@ if (isset($_GET['table'])) {
 
     $search = mysqli_real_escape_string($conn, $_POST['searchCashTable']);
 
-    $q = mysqli_query($conn, "select * from $tableName WHERE date = '$search'");
+    $q = mysqli_query($conn, "select * from `$tableName` WHERE date = '$search' OR charged_invoice = '$search' ");
     $rr = mysqli_num_rows($q);
     if (!$rr) {
         echo "<div class='alert alert-danger'><h2>No Result Found!</h2></div>";

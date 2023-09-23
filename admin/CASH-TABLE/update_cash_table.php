@@ -3,14 +3,14 @@
 if (isset($_GET['name'])) {
     $tableName = mysqli_real_escape_string($conn, urldecode($_GET['name']));
 
-    $q = mysqli_query($conn, "SELECT * FROM $tableName");
+    $q = mysqli_query($conn, "SELECT * FROM `$tableName`");
     if (!$q) {
         echo "Query Error: " . mysqli_error($conn);
         die();
     }
     $id = intval($_GET['id']);
 
-    $query = "SELECT total FROM $tableName WHERE id < $id ORDER BY id DESC LIMIT 1";
+    $query = "SELECT total FROM `$tableName` WHERE id < $id ORDER BY id DESC LIMIT 1";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
@@ -24,7 +24,7 @@ if (isset($_GET['name'])) {
     if (isset($save)) {
         $id = intval($_GET['id']);
 
-        mysqli_query($conn, "UPDATE $tableName SET  
+        mysqli_query($conn, "UPDATE `$tableName` SET  
             `date` ='$date', 
             `charged_invoice` = '$charged_invoice', 
             `amount` = '$amount', 
@@ -36,7 +36,7 @@ if (isset($_GET['name'])) {
         exit;
     }
 
-    $sql = mysqli_query($conn, "SELECT * FROM $tableName WHERE id='" . $_GET['id'] . "'");
+    $sql = mysqli_query($conn, "SELECT * FROM `$tableName` WHERE id='" . $_GET['id'] . "'");
     $res = mysqli_fetch_array($sql);
 }
 ?>
@@ -71,14 +71,14 @@ if (isset($_GET['name'])) {
     <div class="row" style="margin-top:10px">
         <div class="col-sm-4">Amount</div>
         <div class="col-sm-5">
-            <input type="number" value="<?php echo $res['amount']; ?>" id="amount" name="amount" class="form-control" required/>
+            <input type="float" value="<?php echo $res['amount']; ?>" id="amount" name="amount" class="form-control" required/>
         </div>
     </div>
 
     <div class="row" style="margin-top:10px">
         <div class="col-sm-4">Total</div>
         <div class="col-sm-5">
-            <input type="number" value="<?php echo $res['total']; ?>" id="total" name="total" class="form-control" readonly/>
+            <input type="float" value="<?php echo $res['total']; ?>" id="total" name="total" class="form-control" readonly/>
         </div>
     </div>
 

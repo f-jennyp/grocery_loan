@@ -2,7 +2,7 @@
 if (isset($_GET['table'])) {
     $tableName = mysqli_real_escape_string($conn, urldecode($_GET['table']));
 
-    $query = "SELECT total FROM $tableName ORDER BY id DESC LIMIT 1";
+    $query = "SELECT total FROM `$tableName` ORDER BY id DESC LIMIT 1";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
@@ -25,7 +25,7 @@ if (isset($_GET['table'])) {
             $err = "<font color='red'>Fill in all the required fields</font>";
         } else {
 
-            $sql = "INSERT INTO $tableName (date, charged_invoice, amount, total) VALUES (
+            $sql = "INSERT INTO `$tableName` (date, charged_invoice, amount, total) VALUES (
                 '$date', '$charged_invoice', '$amount', '$total')";
 
             // Execute the SQL query

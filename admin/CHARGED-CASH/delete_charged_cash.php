@@ -18,7 +18,7 @@ if (isset($_GET['id']) && isset($_GET['tableName'])) {
         $tableName = str_replace(' ', '_', $tableName);
 
         // Drop the table with the constructed name
-        $dropTableQuery = "DROP TABLE IF EXISTS $tableName";
+        $dropTableQuery = "DROP TABLE IF EXISTS `$tableName`";
         mysqli_query($conn, $dropTableQuery);
 
         // header('location:index.php?page=display_member');

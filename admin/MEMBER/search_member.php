@@ -1,11 +1,11 @@
 <?php
 $search = $_POST['searchMember'];
-$q = mysqli_query($conn, "select * from member where name='$search'");
+$q = mysqli_query($conn, "SELECT * FROM member WHERE name LIKE '%$search%'");
 $rr = mysqli_num_rows($q);
 if (!$rr) {
 	echo "<div class='alert alert-danger'><h2>No Result Found!</h2></div>";
 } else {
-	?>
+?>
 	<script>
 		function DeleteMember(id, memberName) {
 			if (confirm("You want to delete this member?")) {
@@ -48,22 +48,19 @@ if (!$rr) {
 			echo "<td>" . $row['date'] . "</td>";
 			echo "<td>" . $row['remarks'] . "</td>";
 
-			?>
+		?>
 
 			<Td>
 
-				<a href="javascript:DeleteMember('<?php echo $row['member_id']; ?>', '<?php echo $row['name']; ?>')"
-					style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
+				<a href="javascript:DeleteMember('<?php echo $row['member_id']; ?>', '<?php echo $row['name']; ?>')" style='color:Red'><span class='glyphicon glyphicon-trash'></span></a>
 
-				<a href="index.php?page=update_member&member_id=<?php echo $row['member_id']; ?>&name=<?php echo urlencode(str_replace(' ', '_', $row['name'])); ?>"
-					style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
+				<a href="index.php?page=update_member&member_id=<?php echo $row['member_id']; ?>&name=<?php echo urlencode(str_replace(' ', '_', $row['name'])); ?>" style='color:green'><span class='glyphicon glyphicon-edit'></span></a>
 
-				<a href="index.php?page=display_loan&name=<?php echo urlencode(str_replace(' ', '_', $row['name'])); ?>"
-					style="color: darkblue;"><span class="glyphicon glyphicon-eye-open"></span></a>
+				<a href="index.php?page=display_loan&name=<?php echo urlencode(str_replace(' ', '_', $row['name'])); ?>" style="color: darkblue;"><span class="glyphicon glyphicon-eye-open"></span></a>
 
 
 			</td>
-			<?php
+		<?php
 
 			echo "</Tr>";
 			$i++;

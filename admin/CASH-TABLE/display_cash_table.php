@@ -2,7 +2,7 @@
 if (isset($_GET['name'])) {
 	$tableName = mysqli_real_escape_string($conn, urldecode($_GET['name']));
 
-	$q = mysqli_query($conn, "SELECT * FROM $tableName");
+	$q = mysqli_query($conn, "SELECT * FROM `$tableName`");
 	if (!$q) {
 		echo "Query Error: " . mysqli_error($conn);
 		die();
@@ -23,7 +23,7 @@ if (isset($_GET['name'])) {
 		<tr>
 			<form method="post" action="index.php?page=search_cash_table&table=<?php echo urlencode($tableName); ?>">
 				<td colspan="5">
-					<input type="text" placeholder="Search date" name="searchCashTable" class="form-control" required />
+					<input type="text" placeholder="Search date or charged invoice" name="searchCashTable" class="form-control" required />
 				</td>
 				<td colspan="3">
 					<input type="submit" value="Search" name="sub" class="btn btn-warning" />
@@ -60,7 +60,7 @@ if (isset($_GET['name'])) {
 
 		/* Get total number of records */
 
-		$sql = "SELECT count(id) FROM $tableName ";
+		$sql = "SELECT count(id) FROM `$tableName` ";
 		$retval = mysqli_query($conn, $sql);
 
 		if (!$retval) {
@@ -79,7 +79,7 @@ if (isset($_GET['name'])) {
 
 
 		$left_rec = $rec_count - ($pagi * $rec_limit);
-		$sql = "SELECT * " . "FROM $tableName " .
+		$sql = "SELECT * " . "FROM `$tableName` " .
 			"LIMIT $offset, $rec_limit";
 
 		$retval = mysqli_query($conn, $sql);

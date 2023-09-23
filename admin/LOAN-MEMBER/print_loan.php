@@ -36,7 +36,7 @@ if (isset($_GET['table'])) {
 	<table class="table table-bordered">
 		<tr height="30" class="info">
 			<th colspan="18" align="center">
-				<center>All Loan Records</center>
+				<center><?php echo str_replace('_', ' ', $tableName) ?></center>
 			</th>
 		</tr>
 		<Tr class="active">

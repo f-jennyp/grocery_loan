@@ -19,7 +19,7 @@ if (isset($_GET['table'])) {
         $tableName = str_replace(' ', '_', $table_name);
 
         if ($originalTableName !== $tableName) {
-            $renameTableQuery = "RENAME TABLE $originalTableName TO $tableName";
+            $renameTableQuery = "RENAME TABLE `$originalTableName` TO `$tableName`";
             mysqli_query($conn, $renameTableQuery);
         }
 

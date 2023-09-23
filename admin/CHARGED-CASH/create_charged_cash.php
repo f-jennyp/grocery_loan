@@ -12,7 +12,7 @@ if (isset($_POST['save'])) {
             mysqli_query($conn, "INSERT INTO charged_cash_sales_summary VALUES('', '$table_name')");
 
             $newTableName = str_replace(' ', '_', $table_name); // Replace spaces with underscores
-            $loanTableQuery = "CREATE TABLE $newTableName (
+            $loanTableQuery = "CREATE TABLE `$newTableName` (
                 `id` INT AUTO_INCREMENT PRIMARY KEY,
                 `date` DATE,
 				`charged_invoice` FLOAT,

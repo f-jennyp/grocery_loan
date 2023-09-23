@@ -74,6 +74,6 @@ if (isset($save)) {
 
 
 <div style="text-align: center; margin-top: 50px; color:gray; font-size: 11px">
-    &copy; 2023 Jenny-F. All Rights Reserved.
+    &copy; 2023 All Rights Reserved.
 </div>
 

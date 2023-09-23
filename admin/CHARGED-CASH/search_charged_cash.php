@@ -1,6 +1,6 @@
 <?php
 $search = $_POST['searchChargedCash'];
-$q = mysqli_query($conn, "select * from charged_cash_sales_summary where table_name='$search'");
+$q = mysqli_query($conn, "select * from charged_cash_sales_summary where table_name LIKE '%$search%'");
 $rr = mysqli_num_rows($q);
 if (!$rr) {
     echo "<div class='alert alert-danger'><h2>No Result Found!</h2></div>";
